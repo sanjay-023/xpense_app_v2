@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:xpense_app/db/function/db_helper.dart';
+import 'package:xpense_app/db/model/transaction_model.dart';
 import 'package:xpense_app/screens/home%20screen/dash_screen.dart';
 import 'package:xpense_app/screens/home%20screen/widgets/common_widget.dart';
 import 'package:xpense_app/screens/home%20screen/widgets/recent_transaction_widget.dart';
@@ -53,15 +54,15 @@ class ScreenAllTransaction extends StatelessWidget {
                     ),
                   ),
                   commonSizedBox(20),
-                  FutureBuilder<Map>(
-                      future: dbHelper.fetchData(),
+                  FutureBuilder<List<TransactionModel>>(
+                      future: dbHelper.fetch(),
                       builder: (context, snapshot) {
                         if (snapshot.hasError) {
                           return const Text('Unexpected error');
                         }
                         if (snapshot.hasData) {
                           if (snapshot.data!.isEmpty) {
-                            return const Text('No values found');
+                            return const Center(child: Text('No values found'));
                           }
                         }
 

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xpense_app/db/function/db_helper.dart';
+import 'package:xpense_app/db/model/transaction_model.dart';
 import 'package:xpense_app/main.dart';
-import 'package:xpense_app/screens/add%20transaction/widget/amount_widget.dart';
 import 'package:xpense_app/screens/home%20screen/widgets/balance_card_widget.dart';
 import 'package:xpense_app/screens/home%20screen/widgets/chart_widget.dart';
 import 'package:xpense_app/screens/home%20screen/widgets/common_widget.dart';
@@ -20,19 +20,20 @@ class ScreenHome extends StatefulWidget {
 }
 
 class _ScreenHomeState extends State<ScreenHome> {
+  DbHelper dbHelper = DbHelper();
   int totalBalance = 0;
   int totalIncome = 0;
   int totalExpense = 0;
   @override
   void initState() {
     getProfileName();
+    dbHelper.fetch();
 
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    ScreenStatistics screenStatistics = ScreenStatistics();
     page = true;
     DbHelper dbHelper = DbHelper();
     return Scaffold(
@@ -66,15 +67,15 @@ class _ScreenHomeState extends State<ScreenHome> {
               ),
             ),
             commonSizedBox(30),
-            FutureBuilder<Map>(
-                future: dbHelper.fetchData(),
+            FutureBuilder<List<TransactionModel>>(
+                future: dbHelper.fetch(),
                 builder: (context, snapshot) {
                   if (snapshot.hasError) {
                     return const Text('Unexpected error');
                   }
                   if (snapshot.hasData) {
                     if (snapshot.data!.isEmpty) {
-                      return const Text('No values found');
+                      return const Center(child: Text('No values found'));
                     }
                   }
 
@@ -133,23 +134,23 @@ class _ScreenHomeState extends State<ScreenHome> {
     setState(() {});
   }
 
-  getTotalBalance(Map entiredata) {
+  getTotalBalance(List<TransactionModel> entiredata) {
+    final today = DateTime.now();
+
     totalBalance = 0;
     totalExpense = 0;
     totalIncome = 0;
-    entiredata.forEach((key, value) {
-      //print(value);
-      if (value['type'] == 'Income') {
-        totalBalance += (value['amount'] as int);
-        totalIncome += (value['amount'] as int);
-      } else {
-        totalBalance -= (value['amount'] as int);
-        totalExpense += (value['amount'] as int);
-        amount = 0;
+
+    for (TransactionModel data in entiredata) {
+      if (data.date.month == today.month) {
+        if (data.type == "Income") {
+          totalBalance += data.amount;
+          totalIncome += data.amount;
+        } else {
+          totalBalance -= data.amount;
+          totalExpense += data.amount;
+        }
       }
-    });
-    // print(totalBalance);
-    // print(totalIncome);
-    // print(totalExpense);
+    }
   }
 }

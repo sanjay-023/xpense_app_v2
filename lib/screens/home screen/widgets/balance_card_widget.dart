@@ -44,7 +44,7 @@ class _BalanceCardState extends State<BalanceCard> {
           ),
           commonSizedBox(3),
           Text(
-            '\u{20B9} ${widget.totalbal} ',
+            '\u{20B9} ${widget.totalbal < 0 ? 0 : widget.totalbal} ',
             style: GoogleFonts.signikaNegative(
                 textStyle: const TextStyle(
                     fontSize: 36,

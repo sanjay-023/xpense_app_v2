@@ -1,11 +1,14 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:xpense_app/db/model/transaction_model.dart';
 import 'package:xpense_app/screens/statistics/screen_statistics.dart';
 
 class ChartWidget extends StatefulWidget {
-  Map entiredata;
+  List<TransactionModel> entiredata;
   final double height;
   List<FlSpot> dataset = [];
+  List<FlSpot> datasetIncome = [];
+
   DateTime today = DateTime.now();
   ChartWidget({Key? key, required this.entiredata, required this.height})
       : super(key: key);
@@ -31,9 +34,17 @@ class _ChartWidgetState extends State<ChartWidget> {
     } else {
       return Container(
           decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 36, 5, 46),
+              color: Colors.white,
+              boxShadow: const [
+                BoxShadow(
+                    color: Color.fromARGB(33, 0, 0, 0),
+                    blurRadius: 5,
+                    spreadRadius: 4),
+              ],
+              //color: const Color.fromARGB(255, 36, 5, 46),
               borderRadius: BorderRadius.circular(20)),
           height: widget.height,
+          width: 330,
           child: Padding(
             padding: const EdgeInsets.all(12),
             child: LineChart(
@@ -49,21 +60,21 @@ class _ChartWidgetState extends State<ChartWidget> {
                   ),
                   borderData: FlBorderData(
                     show: true,
-                    border:
-                        Border.all(color: const Color(0xff37434d), width: 1),
+                    border: Border.all(
+                        color: const Color.fromARGB(142, 55, 67, 77), width: 1),
                   ),
                   gridData: FlGridData(
                     show: true,
                     getDrawingHorizontalLine: (value) {
                       return FlLine(
-                        color: const Color(0xff37434d),
+                        color: const Color.fromARGB(79, 55, 67, 77),
                         strokeWidth: 1,
                       );
                     },
                     drawVerticalLine: true,
                     getDrawingVerticalLine: (value) {
                       return FlLine(
-                        color: const Color(0xff37434d),
+                        color: const Color.fromARGB(79, 55, 67, 77),
                         strokeWidth: 1,
                       );
                     },
@@ -76,6 +87,7 @@ class _ChartWidgetState extends State<ChartWidget> {
                     //     barWidth: 5),
                     LineChartBarData(
                         isCurved: true,
+                        preventCurveOverShooting: true,
                         belowBarData: BarAreaData(
                             show: true,
                             color: page
@@ -94,37 +106,46 @@ class _ChartWidgetState extends State<ChartWidget> {
     }
   }
 
-  List<FlSpot> getPlotPoints(Map entireData) {
-    ChartWidget chart = ChartWidget(
-      entiredata: widget.entiredata,
-      height: 300,
-    );
-    chart.dataset = [];
-    entireData.forEach((key, value) {
-      if ((value["type"] == "Income") &&
-          (value["date"] as DateTime).month == chart.today.month) {
-        chart.dataset.add(FlSpot((value["date"] as DateTime).day.toDouble(),
-            (value["amount"] as int).toDouble()));
-      }
-    });
+  List<FlSpot> getPlotPoints(List<TransactionModel> entireData) {
+    final today = DateTime.now();
+    ChartWidget chart = ChartWidget(entiredata: widget.entiredata, height: 300);
+    List tempDataSetIncome = [];
 
-    return chart.dataset;
+    for (TransactionModel data in entireData) {
+      if (data.date.month == today.month && data.type == "Income") {
+        tempDataSetIncome.add(data);
+      }
+    }
+
+    tempDataSetIncome.sort((a, b) => a.date.day.compareTo(b.date.day));
+    for (var i = 0; i < tempDataSetIncome.length; i++) {
+      chart.datasetIncome.add(FlSpot(tempDataSetIncome[i].date.day.toDouble(),
+          tempDataSetIncome[i].amount.toDouble()));
+    }
+
+    //print('hello ${tempDataSet}');
+    //print(widget.dataset);
+    return chart.datasetIncome;
   }
 
-  List<FlSpot> getPlotPointsExpense(Map entireData) {
-    ChartWidget chart = ChartWidget(
-      entiredata: widget.entiredata,
-      height: 300,
-    );
-    chart.dataset = [];
-    entireData.forEach((key, value) {
-      if ((value["type"] == "Expense") &&
-          (value["date"] as DateTime).month == chart.today.month) {
-        chart.dataset.add(FlSpot((value["date"] as DateTime).day.toDouble(),
-            (value["amount"] as int).toDouble()));
-      }
-    });
+  List<FlSpot> getPlotPointsExpense(List<TransactionModel> entireData) {
+    final today = DateTime.now();
+    ChartWidget chart = ChartWidget(entiredata: widget.entiredata, height: 300);
+    List tempDataSet = [];
 
+    for (TransactionModel data in entireData) {
+      if (data.date.month == today.month && data.type == "Expense") {
+        tempDataSet.add(data);
+      }
+    }
+
+    tempDataSet.sort((a, b) => a.date.day.compareTo(b.date.day));
+    for (var i = 0; i < tempDataSet.length; i++) {
+      chart.dataset.add(FlSpot(tempDataSet[i].date.day.toDouble(),
+          tempDataSet[i].amount.toDouble()));
+    }
+    //print('hello ${tempDataSet}');
+    //print(widget.dataset);
     return chart.dataset;
   }
 }

@@ -4,6 +4,8 @@ import 'package:xpense_app/screens/home%20screen/dash_screen.dart';
 import 'package:xpense_app/screens/home%20screen/widgets/chart_widget.dart';
 import 'package:xpense_app/screens/home%20screen/widgets/common_widget.dart';
 
+import '../../db/model/transaction_model.dart';
+
 bool page = true;
 
 class ScreenStatistics extends StatelessWidget {
@@ -16,7 +18,7 @@ class ScreenStatistics extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async {
         Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx) {
-          return ScreenDash();
+          return const ScreenDash();
         }));
         return false;
       },
@@ -60,15 +62,16 @@ class ScreenStatistics extends StatelessWidget {
                     shrinkWrap: true,
                     children: [
                       commonSizedBox(20),
-                      FutureBuilder<Map>(
-                          future: dbHelper.fetchData(),
+                      FutureBuilder<List<TransactionModel>>(
+                          future: dbHelper.fetch(),
                           builder: (context, snapshot) {
                             if (snapshot.hasError) {
                               return const Text('Unexpected error');
                             }
                             if (snapshot.hasData) {
                               if (snapshot.data!.isEmpty) {
-                                return const Text('No values found');
+                                return const Center(
+                                    child: Text('No values found'));
                               }
                             }
 

@@ -22,7 +22,7 @@ class _ScreenDashState extends State<ScreenDash> {
   @override
   Widget build(BuildContext context) {
     final _pages = [
-      const ScreenHome(),
+      ScreenHome(),
       ScreenAllTransaction(),
       ScreenAddTransaction(),
       ScreenStatistics(),
