@@ -3,7 +3,9 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:xpense_app/screens/home%20screen/dash_screen.dart';
 import 'package:xpense_app/screens/home%20screen/widgets/common_widget.dart';
 import 'package:xpense_app/screens/home%20screen/widgets/custom_icons.dart';
+import 'package:xpense_app/screens/home%20screen/widgets/recent_transaction_widget.dart';
 import 'package:xpense_app/screens/settingscreen/widgets/notification_widget.dart';
+import 'package:xpense_app/screens/settingscreen/widgets/reset_pop.dart';
 import 'package:xpense_app/screens/settingscreen/widgets/setting_widget.dart';
 
 class ScreenSettings extends StatelessWidget {
@@ -39,7 +41,7 @@ class ScreenSettings extends StatelessWidget {
             const NotificationWidget(),
             GestureDetector(
                 onTap: () {
-                  print('reset clicked');
+                  resetPop(context);
                 },
                 child: SettingWidget(
                     stext: 'Reset Data', sicon: Icons.restart_alt)),

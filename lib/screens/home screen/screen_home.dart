@@ -8,6 +8,8 @@ import 'package:xpense_app/screens/home%20screen/widgets/balance_card_widget.dar
 import 'package:xpense_app/screens/home%20screen/widgets/chart_widget.dart';
 import 'package:xpense_app/screens/home%20screen/widgets/common_widget.dart';
 import 'package:xpense_app/screens/home%20screen/widgets/recent_transaction_widget.dart';
+import 'package:xpense_app/screens/home%20screen/widgets/select_month.dart';
+import 'package:xpense_app/screens/home%20screen/widgets/time_check.dart';
 import 'package:xpense_app/screens/statistics/screen_statistics.dart';
 
 String profName = '';
@@ -45,28 +47,17 @@ class _ScreenHomeState extends State<ScreenHome> {
           children: [
             Row(
               children: [
+                timecontrol(),
                 Text(
-                  'Welcome,$profName',
+                  profName,
                   style: GoogleFonts.signika(
-                      textStyle: const TextStyle(fontSize: 24)),
+                      textStyle: const TextStyle(fontSize: 22)),
                 ),
               ],
             ),
             commonSizedBox(20),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  dateWidget('April', true),
-                  dateWidget('May', false),
-                  dateWidget('Jun', false),
-                  dateWidget('Jul', false),
-                  dateWidget('Aug', false)
-                ],
-              ),
-            ),
-            commonSizedBox(30),
+            //SelectMonth(),
+            //commonSizedBox(30),
             FutureBuilder<List<TransactionModel>>(
                 future: dbHelper.fetch(),
                 builder: (context, snapshot) {
@@ -135,6 +126,7 @@ class _ScreenHomeState extends State<ScreenHome> {
   }
 
   getTotalBalance(List<TransactionModel> entiredata) {
+    //SelectMonth selectMonth = SelectMonth();
     final today = DateTime.now();
 
     totalBalance = 0;
@@ -142,15 +134,15 @@ class _ScreenHomeState extends State<ScreenHome> {
     totalIncome = 0;
 
     for (TransactionModel data in entiredata) {
-      if (data.date.month == today.month) {
-        if (data.type == "Income") {
-          totalBalance += data.amount;
-          totalIncome += data.amount;
-        } else {
-          totalBalance -= data.amount;
-          totalExpense += data.amount;
-        }
+      // if (data.date.month == today.month) {
+      if (data.type == "Income") {
+        totalBalance += data.amount;
+        totalIncome += data.amount;
+      } else {
+        totalBalance -= data.amount;
+        totalExpense += data.amount;
       }
     }
   }
 }
+//}

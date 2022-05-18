@@ -1,6 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:xpense_app/db/model/transaction_model.dart';
+import 'package:xpense_app/screens/home%20screen/widgets/select_month.dart';
 import 'package:xpense_app/screens/statistics/screen_statistics.dart';
 
 class ChartWidget extends StatefulWidget {
@@ -9,7 +10,7 @@ class ChartWidget extends StatefulWidget {
   List<FlSpot> dataset = [];
   List<FlSpot> datasetIncome = [];
 
-  DateTime today = DateTime.now();
+  //DateTime today = DateTime.now();
   ChartWidget({Key? key, required this.entiredata, required this.height})
       : super(key: key);
 
@@ -41,7 +42,6 @@ class _ChartWidgetState extends State<ChartWidget> {
                     blurRadius: 5,
                     spreadRadius: 4),
               ],
-              //color: const Color.fromARGB(255, 36, 5, 46),
               borderRadius: BorderRadius.circular(20)),
           height: widget.height,
           width: 330,
@@ -80,11 +80,6 @@ class _ChartWidgetState extends State<ChartWidget> {
                     },
                   ),
                   lineBarsData: [
-                    // LineChartBarData(
-                    //     isCurved: true,
-                    //     gradient: LinearGradient(colors: gradientColors),
-                    //     spots: getPlotPoints(widget.entiredata),
-                    //     barWidth: 5),
                     LineChartBarData(
                         isCurved: true,
                         preventCurveOverShooting: true,
@@ -107,9 +102,10 @@ class _ChartWidgetState extends State<ChartWidget> {
   }
 
   List<FlSpot> getPlotPoints(List<TransactionModel> entireData) {
-    final today = DateTime.now();
+    // final today = DateTime.now();
     ChartWidget chart = ChartWidget(entiredata: widget.entiredata, height: 300);
     List tempDataSetIncome = [];
+    final today = DateTime.now();
 
     for (TransactionModel data in entireData) {
       if (data.date.month == today.month && data.type == "Income") {
@@ -122,9 +118,6 @@ class _ChartWidgetState extends State<ChartWidget> {
       chart.datasetIncome.add(FlSpot(tempDataSetIncome[i].date.day.toDouble(),
           tempDataSetIncome[i].amount.toDouble()));
     }
-
-    //print('hello ${tempDataSet}');
-    //print(widget.dataset);
     return chart.datasetIncome;
   }
 
@@ -144,8 +137,7 @@ class _ChartWidgetState extends State<ChartWidget> {
       chart.dataset.add(FlSpot(tempDataSet[i].date.day.toDouble(),
           tempDataSet[i].amount.toDouble()));
     }
-    //print('hello ${tempDataSet}');
-    //print(widget.dataset);
+
     return chart.dataset;
   }
 }

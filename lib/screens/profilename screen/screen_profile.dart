@@ -47,7 +47,7 @@ class ScreenProfile extends StatelessWidget {
                       controller: _textcontroller,
                       decoration: const InputDecoration(
                         contentPadding: EdgeInsets.all(5),
-                        hintText: 'Enter Your Name',
+                        hintText: 'Enter Your Nick Name',
                         focusedBorder: InputBorder.none,
                         enabledBorder: InputBorder.none,
                         errorBorder: InputBorder.none,

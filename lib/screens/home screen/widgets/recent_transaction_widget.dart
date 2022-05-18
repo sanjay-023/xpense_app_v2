@@ -3,7 +3,10 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:xpense_app/db/function/db_helper.dart';
 import 'package:xpense_app/db/model/transaction_model.dart';
 import 'package:xpense_app/screens/add%20transaction/widget/date_pick.dart';
+import 'package:xpense_app/screens/add%20transaction/widget/trans_type.dart';
 import 'package:xpense_app/screens/all%20transaction%20screen/widgets/delete_pop.dart';
+import 'package:xpense_app/screens/edit%20transaction/edit_screen.dart';
+import 'package:xpense_app/screens/home%20screen/widgets/select_month.dart';
 
 DbHelper dbHelper = DbHelper();
 
@@ -44,17 +47,19 @@ class _RecentTransactionState extends State<RecentTransaction> {
           } catch (e) {
             return Container();
           }
+
           if (dataAtIndex.type == "Income") {
             return incomeTileWidget(dataAtIndex.amount, dataAtIndex.category,
-                dataAtIndex.date, index);
+                dataAtIndex.date, dataAtIndex.type, index);
           } else {
             return expenseTileWidget(dataAtIndex.amount, dataAtIndex.category,
-                dataAtIndex.date, index);
+                dataAtIndex.date, dataAtIndex.type, index);
           }
         }));
   }
 
-  expenseTileWidget(int value, String category, DateTime date, int index) {
+  expenseTileWidget(
+      int value, String category, DateTime date, String edittype, int index) {
     return Slidable(
       startActionPane: ActionPane(motion: const ScrollMotion(), children: [
         SlidableAction(
@@ -65,6 +70,22 @@ class _RecentTransactionState extends State<RecentTransaction> {
           backgroundColor: const Color.fromARGB(255, 213, 20, 6),
           label: 'Delete',
           icon: Icons.delete,
+        ),
+        SlidableAction(
+          onPressed: (BuildContext context) {
+            Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
+              return ScreenEditTransaction(
+                amount: value,
+                category: category,
+                date: date,
+                type: edittype,
+                index: index,
+              );
+            }));
+          },
+          backgroundColor: Color.fromARGB(255, 3, 161, 22),
+          label: 'Edit',
+          icon: Icons.edit,
         )
       ]),
       child: Container(
@@ -101,8 +122,7 @@ class _RecentTransactionState extends State<RecentTransaction> {
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 20),
                             ),
-                            Text(
-                                '${date.day} ${widget.month[selectedDate.month - 1]}')
+                            Text('${date.day} ${widget.month[date.month - 1]}')
                           ],
                         ),
                         // Text('date')
@@ -133,7 +153,8 @@ class _RecentTransactionState extends State<RecentTransaction> {
     );
   }
 
-  incomeTileWidget(int value, String category, DateTime date, int index) {
+  incomeTileWidget(
+      int value, String category, DateTime date, String edittype, int index) {
     return Slidable(
       startActionPane: ActionPane(motion: const ScrollMotion(), children: [
         SlidableAction(
@@ -144,6 +165,22 @@ class _RecentTransactionState extends State<RecentTransaction> {
           backgroundColor: const Color.fromARGB(255, 213, 20, 6),
           label: 'Delete',
           icon: Icons.delete,
+        ),
+        SlidableAction(
+          onPressed: (BuildContext context) {
+            Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
+              return ScreenEditTransaction(
+                amount: value,
+                category: category,
+                date: date,
+                type: edittype,
+                index: index,
+              );
+            }));
+          },
+          backgroundColor: Color.fromARGB(255, 3, 161, 22),
+          label: 'Edit',
+          icon: Icons.edit,
         )
       ]),
       child: Container(
@@ -177,8 +214,7 @@ class _RecentTransactionState extends State<RecentTransaction> {
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 20),
                         ),
-                        Text(
-                            '${date.day} ${widget.month[selectedDate.month - 1]}')
+                        Text('${date.day} ${widget.month[date.month - 1]}')
                       ],
                     ),
                   ],
