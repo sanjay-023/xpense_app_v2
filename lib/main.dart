@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:xpense_app/screens/splash%20screen/screen_splash.dart';
+import 'package:timezone/data/latest.dart' as tz;
 
 const saveKey = 'profile name';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  tz.initializeTimeZones();
+
   final appdocumentdir = await getApplicationDocumentsDirectory();
   await Hive.initFlutter(appdocumentdir.path);
   await Hive.openBox('money');

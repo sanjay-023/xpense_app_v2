@@ -3,17 +3,30 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:xpense_app/screens/home%20screen/dash_screen.dart';
 import 'package:xpense_app/screens/home%20screen/widgets/common_widget.dart';
 import 'package:xpense_app/screens/home%20screen/widgets/custom_icons.dart';
-import 'package:xpense_app/screens/home%20screen/widgets/recent_transaction_widget.dart';
 import 'package:xpense_app/screens/settingscreen/widgets/notification_widget.dart';
 import 'package:xpense_app/screens/settingscreen/widgets/reset_pop.dart';
 import 'package:xpense_app/screens/settingscreen/widgets/setting_widget.dart';
+import 'package:timezone/data/latest.dart' as tz;
 
-class ScreenSettings extends StatelessWidget {
+class ScreenSettings extends StatefulWidget {
   const ScreenSettings({Key? key}) : super(key: key);
+
+  @override
+  State<ScreenSettings> createState() => _ScreenSettingsState();
+}
+
+class _ScreenSettingsState extends State<ScreenSettings> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    tz.initializeTimeZones();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           leading: IconButton(
             onPressed: () {
@@ -45,8 +58,13 @@ class ScreenSettings extends StatelessWidget {
                 },
                 child: SettingWidget(
                     stext: 'Reset Data', sicon: Icons.restart_alt)),
-            SettingWidget(
-                stext: 'Privacy Policy', sicon: Icons.privacy_tip_outlined),
+            InkWell(
+              onTap: () {
+                print('notification clicked');
+              },
+              child: SettingWidget(
+                  stext: 'Privacy Policy', sicon: Icons.privacy_tip_outlined),
+            ),
             SettingWidget(stext: 'Share', sicon: Icons.share_outlined),
             SettingWidget(
                 stext: 'Rate This App', sicon: Icons.star_border_outlined),
