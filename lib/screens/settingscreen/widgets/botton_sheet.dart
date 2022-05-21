@@ -12,6 +12,7 @@ class BottomSheetNot extends StatefulWidget {
 }
 
 class _BottomSheetNotState extends State<BottomSheetNot> {
+  TimeOfDay? pickedTime;
   TimeOfDay currentTimme = TimeOfDay.now();
   final messageController = TextEditingController();
 
@@ -90,17 +91,17 @@ class _BottomSheetNotState extends State<BottomSheetNot> {
                 ),
                 TextButton(
                     onPressed: () async {
-                      final TimeOfDay? pickedTime = await showTimePicker(
+                      pickedTime = await showTimePicker(
                           context: context, initialTime: currentTimme);
-                      if (pickedTime != null && pickedTime != currentTimme) {
-                        setState(() {
-                          NotificationService.showScheduledNotifications(
-                              title: 'Xpense App',
-                              body: messageController.text,
-                              scheduledTime:
-                                  Time(pickedTime.hour, pickedTime.minute, 0));
-                        });
-                      }
+                      // if (pickedTime != null && pickedTime != currentTimme) {
+                      //   setState(() {
+                      //     NotificationService.showScheduledNotifications(
+                      //         title: 'Xpense App',
+                      //         body: messageController.text,
+                      //         scheduledTime: Time(
+                      //             pickedTime!.hour, pickedTime!.minute, 0));
+                      //   });
+                      // }
                     },
                     child: const Text(
                       'Set Timer',
@@ -111,6 +112,15 @@ class _BottomSheetNotState extends State<BottomSheetNot> {
                 commonSizedBox(10),
                 ElevatedButton(
                     onPressed: () {
+                      if (pickedTime != null && pickedTime != currentTimme) {
+                        setState(() {
+                          NotificationService.showScheduledNotifications(
+                              title: 'Xpense App',
+                              body: messageController.text,
+                              scheduledTime: Time(
+                                  pickedTime!.hour, pickedTime!.minute, 0));
+                        });
+                      }
                       Navigator.of(context).pop();
                     },
                     child: const Text('Done'),

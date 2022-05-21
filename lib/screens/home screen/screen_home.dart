@@ -8,7 +8,6 @@ import 'package:xpense_app/screens/home%20screen/widgets/balance_card_widget.dar
 import 'package:xpense_app/screens/home%20screen/widgets/chart_widget.dart';
 import 'package:xpense_app/screens/home%20screen/widgets/common_widget.dart';
 import 'package:xpense_app/screens/home%20screen/widgets/recent_transaction_widget.dart';
-import 'package:xpense_app/screens/home%20screen/widgets/select_month.dart';
 import 'package:xpense_app/screens/home%20screen/widgets/time_check.dart';
 import 'package:xpense_app/screens/statistics/screen_statistics.dart';
 
@@ -36,6 +35,7 @@ class _ScreenHomeState extends State<ScreenHome> {
 
   @override
   Widget build(BuildContext context) {
+    statDropDownValue = 'Expense';
     page = true;
     DbHelper dbHelper = DbHelper();
     return Scaffold(

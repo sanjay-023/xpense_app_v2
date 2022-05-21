@@ -1,7 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:xpense_app/db/model/transaction_model.dart';
-import 'package:xpense_app/screens/home%20screen/widgets/select_month.dart';
 import 'package:xpense_app/screens/statistics/screen_statistics.dart';
 
 class ChartWidget extends StatefulWidget {
@@ -31,17 +30,18 @@ class _ChartWidgetState extends State<ChartWidget> {
   @override
   Widget build(BuildContext context) {
     if (widget.entiredata.length < 2) {
-      return const Text('Not enough data');
+      return const Center(child: Text('Not enough data'));
     } else {
       return Container(
           decoration: BoxDecoration(
-              color: Colors.white,
-              boxShadow: const [
-                BoxShadow(
-                    color: Color.fromARGB(33, 0, 0, 0),
-                    blurRadius: 5,
-                    spreadRadius: 4),
-              ],
+              //color: Colors.white,
+              color: Colors.transparent,
+              // boxShadow: const [
+              //   BoxShadow(
+              //       color: Color.fromARGB(33, 0, 0, 0),
+              //       blurRadius: 5,
+              //       spreadRadius: 4),
+              // ],
               borderRadius: BorderRadius.circular(20)),
           height: widget.height,
           width: 330,
@@ -85,13 +85,13 @@ class _ChartWidgetState extends State<ChartWidget> {
                         preventCurveOverShooting: true,
                         belowBarData: BarAreaData(
                             show: true,
-                            color: page
+                            color: statDropDownValue == 'Expense'
                                 ? const Color.fromARGB(97, 244, 67, 54)
                                 : const Color.fromARGB(91, 76, 175, 79)),
-                        gradient: page
+                        gradient: statDropDownValue == 'Expense'
                             ? LinearGradient(colors: gradientColorstwo)
                             : LinearGradient(colors: gradientColors),
-                        spots: page
+                        spots: statDropDownValue == "Expense"
                             ? getPlotPointsExpense(widget.entiredata)
                             : getPlotPoints(widget.entiredata),
                         barWidth: 5)

@@ -7,10 +7,17 @@ import 'package:xpense_app/screens/home%20screen/widgets/common_widget.dart';
 import '../../db/model/transaction_model.dart';
 
 bool page = true;
+String statDropDownValue = 'Income';
 
-class ScreenStatistics extends StatelessWidget {
+class ScreenStatistics extends StatefulWidget {
   const ScreenStatistics({Key? key}) : super(key: key);
 
+  @override
+  State<ScreenStatistics> createState() => _ScreenStatisticsState();
+}
+
+class _ScreenStatisticsState extends State<ScreenStatistics> {
+  final items = <String>['Income', 'Expense'];
   @override
   Widget build(BuildContext context) {
     page = false;
@@ -50,7 +57,33 @@ class ScreenStatistics extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        dateWidget('April', true),
+                        Container(
+                          width: 100,
+                          height: 35,
+                          decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 139, 9, 204),
+                              borderRadius: BorderRadius.circular(20)),
+                          child: Center(
+                            child: DropdownButton<String>(
+                                iconEnabledColor: Colors.white,
+                                dropdownColor:
+                                    const Color.fromARGB(255, 139, 9, 204),
+                                style: const TextStyle(color: Colors.white),
+                                underline: const Text(''),
+                                borderRadius: BorderRadius.circular(10),
+                                items: items.map<DropdownMenuItem<String>>(
+                                    (String value) {
+                                  return DropdownMenuItem<String>(
+                                      value: value, child: Text(value));
+                                }).toList(),
+                                value: statDropDownValue,
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    statDropDownValue = newValue!;
+                                  });
+                                }),
+                          ),
+                        ),
                         dateWidget('May', false),
                         dateWidget('Jun', false),
                         dateWidget('Jul', false),
@@ -70,8 +103,11 @@ class ScreenStatistics extends StatelessWidget {
                             }
                             if (snapshot.hasData) {
                               if (snapshot.data!.isEmpty) {
-                                return const Center(
-                                    child: Text('No values found'));
+                                return const SizedBox(
+                                    width: double.infinity,
+                                    child: Text(
+                                      'No values found',
+                                    ));
                               }
                             }
 
