@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
+import 'package:xpense_app/screens/add%20transaction/widget/suggestion.dart';
+import 'package:xpense_app/screens/home%20screen/screen_home.dart';
 import 'package:xpense_app/screens/home%20screen/widgets/custom_icons.dart';
 
 String category = '';
+SuggestionList suggestionList = SuggestionList();
 
 class CategoryWidget extends StatefulWidget {
   const CategoryWidget({Key? key}) : super(key: key);
@@ -11,8 +15,10 @@ class CategoryWidget extends StatefulWidget {
 }
 
 class _CategoryWidgetState extends State<CategoryWidget> {
+  final categoryController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    suggestionList.suggestion(entireData: totalData);
     return Container(
       width: 320,
       height: 60,
@@ -33,22 +39,55 @@ class _CategoryWidgetState extends State<CategoryWidget> {
             Padding(
               padding: const EdgeInsets.only(left: 8),
               child: SizedBox(
-                width: 210,
-                height: 60,
-                child: TextField(
-                  onChanged: (val) {
-                    category = val;
-                  },
-                  keyboardType: TextInputType.text,
-                  decoration: const InputDecoration(
-                    contentPadding: EdgeInsets.all(5),
-                    hintText: 'Category',
-                    focusedBorder: InputBorder.none,
-                    enabledBorder: InputBorder.none,
-                    errorBorder: InputBorder.none,
-                  ),
-                ),
-              ),
+                  width: 210,
+                  height: 60,
+                  // child: TextField(
+                  //   onChanged: (val) {
+                  //     category = val;
+                  //   },
+                  //   keyboardType: TextInputType.text,
+                  //   decoration: const InputDecoration(
+                  //     contentPadding: EdgeInsets.all(5),
+                  //     hintText: 'Category',
+                  //     focusedBorder: InputBorder.none,
+                  //     enabledBorder: InputBorder.none,
+                  //     errorBorder: InputBorder.none,
+                  //   ),
+                  // ),
+                  child: Form(
+                    child: TypeAheadFormField<String?>(
+                      hideOnEmpty: true,
+                      textFieldConfiguration: TextFieldConfiguration(
+                        controller: categoryController,
+                        onChanged: (val) {
+                          category = val;
+                        },
+                        decoration: const InputDecoration(
+                          contentPadding: EdgeInsets.all(5),
+                          hintText: 'Category',
+                          focusedBorder: InputBorder.none,
+                          enabledBorder: InputBorder.none,
+                          errorBorder: InputBorder.none,
+                        ),
+                      ),
+                      onSuggestionSelected: (String? suggestion) {
+                        categoryController.text = suggestion!;
+                        category = categoryController.text;
+                      },
+                      itemBuilder: (context, String? suggestion) {
+                        return ListTile(
+                          title: Text(suggestion!),
+                        );
+                      },
+                      suggestionsCallback: (pattern) {
+                        if (pattern.isNotEmpty) {
+                          return SuggestionList.getSuggestions(pattern);
+                        } else {
+                          return [];
+                        }
+                      },
+                    ),
+                  )),
             )
           ],
         ),

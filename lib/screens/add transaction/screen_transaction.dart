@@ -49,7 +49,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                     commonSizedBox(30),
                     const AmountWidget(),
                     commonSizedBox(20),
-                    const CategoryWidget(),
+                    CategoryWidget(),
                     commonSizedBox(20),
                     const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 30),

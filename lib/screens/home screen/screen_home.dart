@@ -7,11 +7,13 @@ import 'package:xpense_app/main.dart';
 import 'package:xpense_app/screens/home%20screen/widgets/balance_card_widget.dart';
 import 'package:xpense_app/screens/home%20screen/widgets/chart_widget.dart';
 import 'package:xpense_app/screens/home%20screen/widgets/common_widget.dart';
-import 'package:xpense_app/screens/home%20screen/widgets/recent_transaction_widget.dart';
+import 'package:xpense_app/screens/home%20screen/widgets/home_recent_widget.dart';
+import 'package:xpense_app/screens/home%20screen/widgets/select_month.dart';
 import 'package:xpense_app/screens/home%20screen/widgets/time_check.dart';
 import 'package:xpense_app/screens/statistics/screen_statistics.dart';
 
 String profName = '';
+var totalData;
 
 class ScreenHome extends StatefulWidget {
   const ScreenHome({Key? key}) : super(key: key);
@@ -35,8 +37,22 @@ class _ScreenHomeState extends State<ScreenHome> {
 
   @override
   Widget build(BuildContext context) {
+    List<String> months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec"
+    ];
     statDropDownValue = 'Expense';
-    page = true;
+    //page = true;
     DbHelper dbHelper = DbHelper();
     return Scaffold(
         body: SafeArea(
@@ -56,8 +72,84 @@ class _ScreenHomeState extends State<ScreenHome> {
               ],
             ),
             commonSizedBox(20),
-            //SelectMonth(),
-            //commonSizedBox(30),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      monthIndex = 3;
+                      today = DateTime(now.year, now.month - 2, today.day);
+                    });
+                  },
+                  child: Container(
+                    height: 35,
+                    width: 100,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: monthIndex == 3
+                            ? const Color.fromARGB(255, 139, 9, 204)
+                            : const Color.fromARGB(255, 214, 213, 213)),
+                    alignment: Alignment.center,
+                    child: Text(
+                      months[now.month - 3],
+                      style: TextStyle(
+                          fontSize: 18,
+                          color: monthIndex == 3 ? Colors.white : Colors.black),
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      monthIndex = 2;
+                      today = DateTime(now.year, now.month - 1, today.day);
+                    });
+                  },
+                  child: Container(
+                    height: 35,
+                    width: 100,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: monthIndex == 2
+                            ? const Color.fromARGB(255, 139, 9, 204)
+                            : const Color.fromARGB(255, 214, 213, 213)),
+                    alignment: Alignment.center,
+                    child: Text(
+                      months[now.month - 2],
+                      style: TextStyle(
+                          fontSize: 18,
+                          color: monthIndex == 2 ? Colors.white : Colors.black),
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      monthIndex = 1;
+                      today = DateTime.now();
+                    });
+                  },
+                  child: Container(
+                    height: 35,
+                    width: 100,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: monthIndex == 1
+                            ? const Color.fromARGB(255, 139, 9, 204)
+                            : const Color.fromARGB(255, 214, 213, 213)),
+                    alignment: Alignment.center,
+                    child: Text(
+                      months[now.month - 1],
+                      style: TextStyle(
+                          fontSize: 18,
+                          color: monthIndex == 1 ? Colors.white : Colors.black),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            commonSizedBox(30),
             FutureBuilder<List<TransactionModel>>(
                 future: dbHelper.fetch(),
                 builder: (context, snapshot) {
@@ -73,6 +165,8 @@ class _ScreenHomeState extends State<ScreenHome> {
                   if (snapshot.data == null) {
                     return const Text('Unexpected error');
                   }
+
+                  totalData = snapshot.data!;
 
                   getTotalBalance(snapshot.data!);
                   return Column(
@@ -107,7 +201,8 @@ class _ScreenHomeState extends State<ScreenHome> {
                         ],
                       ),
                       commonSizedBox(20),
-                      RecentTransaction(data: snapshot.data!),
+                      //RecentTransaction(data: snapshot.data!),
+                      HomeRecentWidget(data: snapshot.data!),
                       commonSizedBox(60),
                     ],
                   );
@@ -127,22 +222,22 @@ class _ScreenHomeState extends State<ScreenHome> {
 
   getTotalBalance(List<TransactionModel> entiredata) {
     //SelectMonth selectMonth = SelectMonth();
-    final today = DateTime.now();
+    //final today = DateTime.now();
 
     totalBalance = 0;
     totalExpense = 0;
     totalIncome = 0;
 
     for (TransactionModel data in entiredata) {
-      // if (data.date.month == today.month) {
-      if (data.type == "Income") {
-        totalBalance += data.amount;
-        totalIncome += data.amount;
-      } else {
-        totalBalance -= data.amount;
-        totalExpense += data.amount;
+      if (data.date.month == today.month) {
+        if (data.type == "Income") {
+          totalBalance += data.amount;
+          totalIncome += data.amount;
+        } else {
+          totalBalance -= data.amount;
+          totalExpense += data.amount;
+        }
       }
     }
   }
 }
-//}

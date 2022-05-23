@@ -24,7 +24,7 @@ class _EditAmountWidgetState extends State<EditAmountWidget> {
   Widget build(BuildContext context) {
     editAmountController.text = widget.editAmount.toString();
     editedamount = int.parse(editAmountController.text);
-    print(editedamount);
+    //print(editedamount);
     return Container(
       width: 320,
       height: 60,
@@ -51,7 +51,7 @@ class _EditAmountWidgetState extends State<EditAmountWidget> {
                   controller: editAmountController,
                   onChanged: (val) {
                     editedamount = int.parse(val);
-                    print(editedamount);
+                    //print(editedamount);
                   },
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(

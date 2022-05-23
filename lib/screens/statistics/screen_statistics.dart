@@ -3,6 +3,7 @@ import 'package:xpense_app/db/function/db_helper.dart';
 import 'package:xpense_app/screens/home%20screen/dash_screen.dart';
 import 'package:xpense_app/screens/home%20screen/widgets/chart_widget.dart';
 import 'package:xpense_app/screens/home%20screen/widgets/common_widget.dart';
+import 'package:xpense_app/screens/statistics/widget/stat_filter.dart';
 
 import '../../db/model/transaction_model.dart';
 
@@ -84,10 +85,10 @@ class _ScreenStatisticsState extends State<ScreenStatistics> {
                                 }),
                           ),
                         ),
-                        dateWidget('May', false),
-                        dateWidget('Jun', false),
-                        dateWidget('Jul', false),
-                        dateWidget('Aug', false)
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        const StatFilter()
                       ],
                     ),
                   ),

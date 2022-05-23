@@ -1,11 +1,11 @@
 // import 'package:flutter/material.dart';
 
-// DateTime today = DateTime.now();
-// DateTime now = DateTime.now();
+DateTime today = DateTime.now();
+DateTime now = DateTime.now();
+int monthIndex = 1;
 
 // class SelectMonth extends StatefulWidget {
-//   SelectMonth({Key? key}) : super(key: key);
-//   int index = 1;
+//   const SelectMonth({Key? key}) : super(key: key);
 
 //   @override
 //   State<SelectMonth> createState() => _SelectMonthState();
@@ -14,6 +14,7 @@
 // class _SelectMonthState extends State<SelectMonth> {
 //   @override
 //   Widget build(BuildContext context) {
+//     //print(today);
 //     List<String> months = [
 //       "Jan",
 //       "Feb",
@@ -34,7 +35,7 @@
 //         InkWell(
 //           onTap: () {
 //             setState(() {
-//               widget.index = 3;
+//               monthIndex = 3;
 //               today = DateTime(now.year, now.month - 2, today.day);
 //             });
 //           },
@@ -43,7 +44,7 @@
 //             width: 100,
 //             decoration: BoxDecoration(
 //                 borderRadius: BorderRadius.circular(20),
-//                 color: widget.index == 3
+//                 color: monthIndex == 3
 //                     ? const Color.fromARGB(255, 139, 9, 204)
 //                     : const Color.fromARGB(255, 214, 213, 213)),
 //             alignment: Alignment.center,
@@ -51,14 +52,14 @@
 //               months[now.month - 3],
 //               style: TextStyle(
 //                   fontSize: 18,
-//                   color: widget.index == 3 ? Colors.white : Colors.black),
+//                   color: monthIndex == 3 ? Colors.white : Colors.black),
 //             ),
 //           ),
 //         ),
 //         InkWell(
 //           onTap: () {
 //             setState(() {
-//               widget.index = 2;
+//               monthIndex = 2;
 //               today = DateTime(now.year, now.month - 1, today.day);
 //             });
 //           },
@@ -67,7 +68,7 @@
 //             width: 100,
 //             decoration: BoxDecoration(
 //                 borderRadius: BorderRadius.circular(20),
-//                 color: widget.index == 2
+//                 color: monthIndex == 2
 //                     ? const Color.fromARGB(255, 139, 9, 204)
 //                     : const Color.fromARGB(255, 214, 213, 213)),
 //             alignment: Alignment.center,
@@ -75,14 +76,14 @@
 //               months[now.month - 2],
 //               style: TextStyle(
 //                   fontSize: 18,
-//                   color: widget.index == 2 ? Colors.white : Colors.black),
+//                   color: monthIndex == 2 ? Colors.white : Colors.black),
 //             ),
 //           ),
 //         ),
 //         InkWell(
 //           onTap: () {
 //             setState(() {
-//               widget.index = 1;
+//               monthIndex = 1;
 //               today = DateTime.now();
 //             });
 //           },
@@ -91,7 +92,7 @@
 //             width: 100,
 //             decoration: BoxDecoration(
 //                 borderRadius: BorderRadius.circular(20),
-//                 color: widget.index == 1
+//                 color: monthIndex == 1
 //                     ? const Color.fromARGB(255, 139, 9, 204)
 //                     : const Color.fromARGB(255, 214, 213, 213)),
 //             alignment: Alignment.center,
@@ -99,7 +100,7 @@
 //               months[now.month - 1],
 //               style: TextStyle(
 //                   fontSize: 18,
-//                   color: widget.index == 1 ? Colors.white : Colors.black),
+//                   color: monthIndex == 1 ? Colors.white : Colors.black),
 //             ),
 //           ),
 //         ),

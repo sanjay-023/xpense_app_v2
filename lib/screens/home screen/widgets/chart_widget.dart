@@ -8,6 +8,9 @@ class ChartWidget extends StatefulWidget {
   final double height;
   List<FlSpot> dataset = [];
   List<FlSpot> datasetIncome = [];
+  List<FlSpot> yearDataSetIncome = [];
+
+  List<FlSpot> yearDatasetExpense = [];
 
   //DateTime today = DateTime.now();
   ChartWidget({Key? key, required this.entiredata, required this.height})
@@ -139,5 +142,26 @@ class _ChartWidgetState extends State<ChartWidget> {
     }
 
     return chart.dataset;
+  }
+
+  List<FlSpot> yearGetPlotPointsExpense(List<TransactionModel> entireData) {
+    final today = DateTime.now();
+    ChartWidget chart = ChartWidget(entiredata: widget.entiredata, height: 300);
+    List yeartempDataSet = [];
+
+    for (TransactionModel data in entireData) {
+      if (data.date.month == today.month && data.type == "Expense") {
+        yeartempDataSet.add(data);
+      }
+    }
+
+    yeartempDataSet.sort((a, b) => a.date.day.compareTo(b.date.day));
+    for (var i = 0; i < yeartempDataSet.length; i++) {
+      chart.yearDatasetExpense.add(FlSpot(
+          yeartempDataSet[i].date.day.toDouble(),
+          yeartempDataSet[i].amount.toDouble()));
+    }
+
+    return chart.yearDatasetExpense;
   }
 }
