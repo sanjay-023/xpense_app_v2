@@ -4,6 +4,7 @@ import 'package:xpense_app/screens/home%20screen/dash_screen.dart';
 import 'package:xpense_app/screens/home%20screen/widgets/common_widget.dart';
 import 'package:xpense_app/screens/home%20screen/widgets/custom_icons.dart';
 import 'package:xpense_app/screens/settingscreen/widgets/notification_widget.dart';
+import 'package:xpense_app/screens/settingscreen/widgets/privacy_policy.dart';
 import 'package:xpense_app/screens/settingscreen/widgets/reset_pop.dart';
 import 'package:xpense_app/screens/settingscreen/widgets/setting_widget.dart';
 import 'package:timezone/data/latest.dart' as tz;
@@ -60,7 +61,11 @@ class _ScreenSettingsState extends State<ScreenSettings> {
                     stext: 'Reset Data', sicon: Icons.restart_alt)),
             InkWell(
               onTap: () {
-                print('notification clicked');
+                showModalBottomSheet(
+                    context: context,
+                    builder: (builder) {
+                      return const PrivacyPolicy();
+                    });
               },
               child: SettingWidget(
                   stext: 'Privacy Policy', sicon: Icons.privacy_tip_outlined),

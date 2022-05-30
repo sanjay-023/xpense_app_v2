@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xpense_app/db/function/db_helper.dart';
 import 'package:xpense_app/db/model/transaction_model.dart';
 import 'package:xpense_app/main.dart';
+import 'package:xpense_app/screens/add%20transaction/widget/category_widget.dart';
 import 'package:xpense_app/screens/home%20screen/widgets/balance_card_widget.dart';
 import 'package:xpense_app/screens/home%20screen/widgets/chart_widget.dart';
 import 'package:xpense_app/screens/home%20screen/widgets/common_widget.dart';
@@ -31,6 +32,8 @@ class _ScreenHomeState extends State<ScreenHome> {
   void initState() {
     getProfileName();
     dbHelper.fetch();
+    statIndex = 1;
+    statDropDownValue = "Expense";
 
     super.initState();
   }
@@ -166,9 +169,9 @@ class _ScreenHomeState extends State<ScreenHome> {
                     return const Text('Unexpected error');
                   }
 
-                  totalData = snapshot.data!;
-
                   getTotalBalance(snapshot.data!);
+                  totalData = snapshot.data!;
+                  suggestionList.suggestion(entireData: snapshot.data!);
                   return Column(
                     children: [
                       BalanceCard(
@@ -202,7 +205,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                       ),
                       commonSizedBox(20),
                       //RecentTransaction(data: snapshot.data!),
-                      HomeRecentWidget(data: snapshot.data!),
+                      HomeRecentWidget(data: snapshot.data!.toList()),
                       commonSizedBox(60),
                     ],
                   );

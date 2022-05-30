@@ -2,13 +2,14 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:xpense_app/db/model/transaction_model.dart';
 import 'package:xpense_app/screens/statistics/screen_statistics.dart';
+import 'package:xpense_app/screens/statistics/widget/stat_filter.dart';
 
 class ChartWidget extends StatefulWidget {
   List<TransactionModel> entiredata;
   final double height;
   List<FlSpot> dataset = [];
   List<FlSpot> datasetIncome = [];
-  List<FlSpot> yearDataSetIncome = [];
+  List<FlSpot> yearDataSetExpense = [];
 
   List<FlSpot> yearDatasetExpense = [];
 
@@ -94,9 +95,18 @@ class _ChartWidgetState extends State<ChartWidget> {
                         gradient: statDropDownValue == 'Expense'
                             ? LinearGradient(colors: gradientColorstwo)
                             : LinearGradient(colors: gradientColors),
-                        spots: statDropDownValue == "Expense"
+                        spots: statDropDownValue == "Expense" && statIndex == 1
                             ? getPlotPointsExpense(widget.entiredata)
-                            : getPlotPoints(widget.entiredata),
+                            : statDropDownValue == "Income" && statIndex == 1
+                                ? getPlotPoints(widget.entiredata)
+                                : statDropDownValue == "Income" &&
+                                        statIndex == 2
+                                    ? getYearPlotPointsIncome(widget.entiredata)
+                                    : statDropDownValue == "Expense" &&
+                                            statIndex == 2
+                                        ? getYearPlotPointsExpense(
+                                            widget.entiredata)
+                                        : getPlotPoints(widget.entiredata),
                         barWidth: 5)
                   ]),
             ),
@@ -144,24 +154,47 @@ class _ChartWidgetState extends State<ChartWidget> {
     return chart.dataset;
   }
 
-  List<FlSpot> yearGetPlotPointsExpense(List<TransactionModel> entireData) {
-    final today = DateTime.now();
-    ChartWidget chart = ChartWidget(entiredata: widget.entiredata, height: 300);
-    List yeartempDataSet = [];
-
-    for (TransactionModel data in entireData) {
-      if (data.date.month == today.month && data.type == "Expense") {
-        yeartempDataSet.add(data);
+  int getSumMonth(
+      List<TransactionModel> entireData, int month, String transactionType) {
+    int sum = 0;
+    for (TransactionModel transaction in entireData) {
+      if (transaction.date.month == month &&
+          transaction.type == transactionType) {
+        sum += transaction.amount;
       }
     }
+    return sum;
+  }
 
-    yeartempDataSet.sort((a, b) => a.date.day.compareTo(b.date.day));
-    for (var i = 0; i < yeartempDataSet.length; i++) {
-      chart.yearDatasetExpense.add(FlSpot(
-          yeartempDataSet[i].date.day.toDouble(),
-          yeartempDataSet[i].amount.toDouble()));
+  List<FlSpot> getYearPlotPointsExpense(List<TransactionModel> entireData) {
+    ChartWidget chart = ChartWidget(entiredata: widget.entiredata, height: 300);
+    List yearTempDataSetExpense = [];
+
+    for (var i = 1; i <= 12; i++) {
+      yearTempDataSetExpense.add(getSumMonth(widget.entiredata, i, "Expense"));
     }
 
-    return chart.yearDatasetExpense;
+    for (var i = 0; i < yearTempDataSetExpense.length; i++) {
+      chart.yearDataSetExpense
+          .add(FlSpot(i.toDouble(), yearTempDataSetExpense[i].toDouble()));
+    }
+
+    return chart.yearDataSetExpense;
+  }
+
+  List<FlSpot> getYearPlotPointsIncome(List<TransactionModel> entireData) {
+    ChartWidget chart = ChartWidget(entiredata: widget.entiredata, height: 300);
+    List yearTempDataSetExpense = [];
+
+    for (var i = 1; i <= 12; i++) {
+      yearTempDataSetExpense.add(getSumMonth(widget.entiredata, i, "Income"));
+    }
+
+    for (var i = 0; i < yearTempDataSetExpense.length; i++) {
+      chart.yearDataSetExpense
+          .add(FlSpot(i.toDouble(), yearTempDataSetExpense[i].toDouble()));
+    }
+
+    return chart.yearDataSetExpense;
   }
 }

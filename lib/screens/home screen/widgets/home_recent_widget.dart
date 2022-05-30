@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:xpense_app/db/model/transaction_model.dart';
 
-import '../../../db/model/transaction_model.dart';
-import '../../all transaction screen/widgets/delete_pop.dart';
-import '../../edit transaction/edit_screen.dart';
+import 'package:xpense_app/screens/all%20transaction%20screen/widgets/delete_pop.dart';
+import 'package:xpense_app/screens/edit%20transaction/edit_screen.dart';
 
 class HomeRecentWidget extends StatefulWidget {
   List<TransactionModel> data;
@@ -30,38 +30,23 @@ class HomeRecentWidget extends StatefulWidget {
 class _HomeRecentWidgetState extends State<HomeRecentWidget> {
   @override
   Widget build(BuildContext context) {
-    DateTime todayRecent = DateTime.now();
     return ListView.builder(
-        reverse: true,
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
-        itemCount: widget.data.length,
+        itemCount: widget.data.length < 5 ? widget.data.length : 5,
         itemBuilder: ((context, index) {
+          final newList = widget.data.reversed;
           TransactionModel dataAtIndex;
           try {
-            dataAtIndex = widget.data[index];
+            dataAtIndex = newList.elementAt(index);
           } catch (e) {
             return Container();
           }
 
-          if (dataAtIndex.type == "Income" &&
-                  dataAtIndex.date.month == todayRecent.month &&
-                  dataAtIndex.date.day == todayRecent.day &&
-                  dataAtIndex.date.year == todayRecent.year ||
-              dataAtIndex.type == "Income" &&
-                  dataAtIndex.date.day == todayRecent.day - 1 &&
-                  dataAtIndex.date.month == todayRecent.month &&
-                  dataAtIndex.date.year == todayRecent.year) {
+          if (dataAtIndex.type == "Income") {
             return incomeTileWidget(dataAtIndex.amount, dataAtIndex.category,
                 dataAtIndex.date, dataAtIndex.type, index);
-          } else if (dataAtIndex.type == "Expense" &&
-                  dataAtIndex.date.month == todayRecent.month &&
-                  dataAtIndex.date.day == todayRecent.day &&
-                  dataAtIndex.date.year == todayRecent.year ||
-              dataAtIndex.type == 'Expense' &&
-                  dataAtIndex.date.day == todayRecent.day - 1 &&
-                  dataAtIndex.date.month == todayRecent.month &&
-                  dataAtIndex.date.year == todayRecent.year) {
+          } else if (dataAtIndex.type == "Expense") {
             return expenseTileWidget(dataAtIndex.amount, dataAtIndex.category,
                 dataAtIndex.date, dataAtIndex.type, index);
           } else {

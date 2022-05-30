@@ -1,5 +1,4 @@
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xpense_app/db/model/transaction_model.dart';
 
 class DbHelper {
@@ -61,4 +60,6 @@ class DbHelper {
     final box = Hive.box('money');
     box.clear();
   }
+
+  void resetShared() {}
 }

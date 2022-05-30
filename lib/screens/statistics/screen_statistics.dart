@@ -3,9 +3,10 @@ import 'package:xpense_app/db/function/db_helper.dart';
 import 'package:xpense_app/screens/home%20screen/dash_screen.dart';
 import 'package:xpense_app/screens/home%20screen/widgets/chart_widget.dart';
 import 'package:xpense_app/screens/home%20screen/widgets/common_widget.dart';
-import 'package:xpense_app/screens/statistics/widget/stat_filter.dart';
 
 import '../../db/model/transaction_model.dart';
+
+int statIndex = 1;
 
 bool page = true;
 String statDropDownValue = 'Income';
@@ -88,7 +89,65 @@ class _ScreenStatisticsState extends State<ScreenStatistics> {
                         const SizedBox(
                           width: 10,
                         ),
-                        const StatFilter()
+                        Row(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                setState(() {
+                                  statIndex = 1;
+                                });
+                              },
+                              child: Container(
+                                width: 100,
+                                height: 35,
+                                decoration: BoxDecoration(
+                                    color: statIndex == 1
+                                        ? const Color.fromARGB(255, 139, 9, 204)
+                                        : const Color.fromARGB(
+                                            255, 186, 185, 185),
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: Center(
+                                    child: Text(
+                                  'This Month',
+                                  style: TextStyle(
+                                      color: statIndex == 1
+                                          ? Colors.white
+                                          : const Color.fromARGB(
+                                              255, 99, 98, 98)),
+                                )),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                setState(() {
+                                  statIndex = 2;
+                                });
+                              },
+                              child: Container(
+                                width: 100,
+                                height: 35,
+                                decoration: BoxDecoration(
+                                    color: statIndex == 2
+                                        ? const Color.fromARGB(255, 139, 9, 204)
+                                        : const Color.fromARGB(
+                                            255, 186, 185, 185),
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: Center(
+                                    child: Text(
+                                  'This Year',
+                                  style: TextStyle(
+                                      color: statIndex == 2
+                                          ? Colors.white
+                                          : const Color.fromARGB(
+                                              255, 99, 98, 98)),
+                                )),
+                              ),
+                            ),
+                          ],
+                        )
                       ],
                     ),
                   ),
@@ -115,6 +174,7 @@ class _ScreenStatisticsState extends State<ScreenStatistics> {
                             if (snapshot.data == null) {
                               return const Text('Unexpected error');
                             }
+
                             return ChartWidget(
                               entiredata: snapshot.data!,
                               height: 500,

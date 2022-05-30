@@ -4,6 +4,9 @@ List<String> suggestiondata = [];
 
 class SuggestionList {
   void suggestion({required List<TransactionModel> entireData}) {
+    if (entireData.isEmpty) {
+      [];
+    }
     for (TransactionModel data in entireData) {
       if (data.category.isNotEmpty) {
         suggestiondata.add(data.category);

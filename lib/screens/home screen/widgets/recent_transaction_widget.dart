@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:xpense_app/db/function/db_helper.dart';
 import 'package:xpense_app/db/model/transaction_model.dart';
-import 'package:xpense_app/screens/add%20transaction/widget/date_pick.dart';
-import 'package:xpense_app/screens/add%20transaction/widget/trans_type.dart';
+
 import 'package:xpense_app/screens/all%20transaction%20screen/widgets/delete_pop.dart';
 import 'package:xpense_app/screens/edit%20transaction/edit_screen.dart';
-import 'package:xpense_app/screens/home%20screen/widgets/select_month.dart';
 
 DbHelper dbHelper = DbHelper();
 
@@ -83,7 +81,7 @@ class _RecentTransactionState extends State<RecentTransaction> {
               );
             }));
           },
-          backgroundColor: Color.fromARGB(255, 3, 161, 22),
+          backgroundColor: const Color.fromARGB(255, 3, 161, 22),
           label: 'Edit',
           icon: Icons.edit,
         )
@@ -178,7 +176,7 @@ class _RecentTransactionState extends State<RecentTransaction> {
               );
             }));
           },
-          backgroundColor: Color.fromARGB(255, 3, 161, 22),
+          backgroundColor: const Color.fromARGB(255, 3, 161, 22),
           label: 'Edit',
           icon: Icons.edit,
         )

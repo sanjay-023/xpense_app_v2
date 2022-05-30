@@ -18,7 +18,10 @@ class _CategoryWidgetState extends State<CategoryWidget> {
   final categoryController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    suggestionList.suggestion(entireData: totalData);
+    if (totalData == null) {
+      const Text('Unexpected error');
+    }
+
     return Container(
       width: 320,
       height: 60,
@@ -71,6 +74,9 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                         ),
                       ),
                       onSuggestionSelected: (String? suggestion) {
+                        if (suggestion == null) {
+                          "";
+                        }
                         categoryController.text = suggestion!;
                         category = categoryController.text;
                       },
