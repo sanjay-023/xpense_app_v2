@@ -20,14 +20,16 @@ class _ScreenOnboardState extends State<ScreenOnboard> {
           SingleChildScrollView(
             child: Container(
               height: 800,
-              color: Color.fromARGB(255, 255, 255, 255),
+              color: const Color.fromARGB(255, 255, 255, 255),
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 80),
                 child: Column(
                   children: [
-                    const Image(
-                        image: AssetImage(
-                            'assets/images/onboard screen one image.png')),
+                    Image(
+                        width: MediaQuery.of(context).size.width * 0.8,
+                        image: const AssetImage(
+                          'assets/images/onboard screen one image.png',
+                        )),
                     Text(
                       'Save For Your \n Future !',
                       textAlign: TextAlign.center,
@@ -44,9 +46,9 @@ class _ScreenOnboardState extends State<ScreenOnboard> {
                       height: 70,
                       width: 320,
                       child: Text(
-                        't is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution t is a long established fact that a reader will be distracted by the readable content of a page when looking at its layo',
+                        'Xpense makes it easy to keep a track of where your money is going.It will use visuals and graphs to give you insights into your spending habits. You can also set remainders, and the app will notify you.',
                         style: TextStyle(
-                            fontSize: 10,
+                            fontSize: 13,
                             color: Color.fromARGB(255, 109, 108, 108)),
                         textAlign: TextAlign.center,
                       ),
@@ -79,9 +81,10 @@ class _ScreenOnboardState extends State<ScreenOnboard> {
                 padding: const EdgeInsets.symmetric(vertical: 80),
                 child: Column(
                   children: [
-                    const Image(
-                        image:
-                            AssetImage('assets/images/onboard screen 2.png')),
+                    Image(
+                        width: MediaQuery.of(context).size.width * 0.8,
+                        image: const AssetImage(
+                            'assets/images/onboard screen 2.png')),
                     Text(
                       'Analyze Your \n Spending',
                       textAlign: TextAlign.center,
@@ -98,8 +101,10 @@ class _ScreenOnboardState extends State<ScreenOnboard> {
                       height: 70,
                       width: 320,
                       child: Text(
-                        't is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution t is a long established fact that a reader will be distracted by the readable content of a page when looking at its layo',
-                        style: TextStyle(fontSize: 10),
+                        'Xpense is more serious in terms of the interface and features it offers. If you want a microscopic view of your money, this is the app for you. To help you plan better',
+                        style: TextStyle(
+                            fontSize: 13,
+                            color: Color.fromARGB(255, 109, 108, 108)),
                         textAlign: TextAlign.center,
                       ),
                     ),

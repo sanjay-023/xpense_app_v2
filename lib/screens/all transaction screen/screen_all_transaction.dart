@@ -7,6 +7,7 @@ import 'package:xpense_app/screens/home%20screen/widgets/common_widget.dart';
 
 String datFilterValue = 'All';
 String yearFilterValue = 'Jan';
+int flag = 1;
 
 class ScreenAllTransaction extends StatefulWidget {
   const ScreenAllTransaction({Key? key}) : super(key: key);
@@ -80,8 +81,8 @@ class _ScreenAllTransactionState extends State<ScreenAllTransaction> {
                       children: [
                         // FIRST DROPDOWN
                         Container(
-                          width: 100,
-                          height: 35,
+                          width: MediaQuery.of(context).size.width * 0.26,
+                          height: MediaQuery.of(context).size.height * 0.05,
                           decoration: BoxDecoration(
                               color: const Color.fromARGB(255, 139, 9, 204),
                               borderRadius: BorderRadius.circular(20)),
@@ -90,7 +91,8 @@ class _ScreenAllTransactionState extends State<ScreenAllTransaction> {
                                 iconEnabledColor: Colors.white,
                                 dropdownColor:
                                     const Color.fromARGB(255, 139, 9, 204),
-                                style: const TextStyle(color: Colors.white),
+                                style: const TextStyle(
+                                    color: Colors.white, fontSize: 12),
                                 underline: const Text(''),
                                 borderRadius: BorderRadius.circular(10),
                                 items: items.map<DropdownMenuItem<String>>(
@@ -112,8 +114,8 @@ class _ScreenAllTransactionState extends State<ScreenAllTransaction> {
                           width: 10,
                         ),
                         Container(
-                          width: 110,
-                          height: 35,
+                          width: MediaQuery.of(context).size.width * 0.26,
+                          height: MediaQuery.of(context).size.height * 0.05,
                           decoration: BoxDecoration(
                               color: const Color.fromARGB(255, 139, 9, 204),
                               borderRadius: BorderRadius.circular(20)),
@@ -122,7 +124,8 @@ class _ScreenAllTransactionState extends State<ScreenAllTransaction> {
                                 iconEnabledColor: Colors.white,
                                 dropdownColor:
                                     const Color.fromARGB(255, 139, 9, 204),
-                                style: const TextStyle(color: Colors.white),
+                                style: const TextStyle(
+                                    color: Colors.white, fontSize: 12),
                                 underline: const Text(''),
                                 borderRadius: BorderRadius.circular(10),
                                 items: itemsDatFilter
@@ -146,8 +149,8 @@ class _ScreenAllTransactionState extends State<ScreenAllTransaction> {
                           width: 10,
                         ),
                         Container(
-                          width: 110,
-                          height: 35,
+                          width: MediaQuery.of(context).size.width * 0.26,
+                          height: MediaQuery.of(context).size.height * 0.05,
                           decoration: BoxDecoration(
                               color: datFilterValue == 'This Year'
                                   ? const Color.fromARGB(255, 139, 9, 204)
@@ -160,7 +163,8 @@ class _ScreenAllTransactionState extends State<ScreenAllTransaction> {
                                 iconEnabledColor: Colors.white,
                                 dropdownColor:
                                     const Color.fromARGB(255, 139, 9, 204),
-                                style: const TextStyle(color: Colors.white),
+                                style: const TextStyle(
+                                    color: Colors.white, fontSize: 12),
                                 underline: const Text(''),
                                 borderRadius: BorderRadius.circular(10),
                                 items: datFilterValue == 'This Year'
@@ -187,16 +191,36 @@ class _ScreenAllTransactionState extends State<ScreenAllTransaction> {
                       future: dbHelper.fetch(),
                       builder: (context, snapshot) {
                         if (snapshot.hasError) {
-                          return const Text('Unexpected error');
+                          return const Text('');
                         }
                         if (snapshot.hasData) {
                           if (snapshot.data!.isEmpty) {
-                            return const Center(child: Text('No values found'));
+                            flag = 0;
+                            return Column(
+                              children: [
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.8,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.35,
+                                  decoration: const BoxDecoration(
+                                      image: DecorationImage(
+                                          image: AssetImage(
+                                              'assets/images/notransyet.png'))),
+                                ),
+                                const Text(
+                                  'No Transactions Yet!',
+                                  style: TextStyle(
+                                      color: Color.fromARGB(255, 124, 124, 124),
+                                      fontSize: 18),
+                                )
+                              ],
+                            );
                           }
                         }
 
                         if (snapshot.data == null) {
-                          return const Text('Unexpected error');
+                          return const Text(' ');
                         }
                         return Column(
                           children: [

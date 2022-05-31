@@ -73,10 +73,15 @@ class _ScreenSettingsState extends State<ScreenSettings> {
             SettingWidget(stext: 'Share', sicon: Icons.share_outlined),
             SettingWidget(
                 stext: 'Rate This App', sicon: Icons.star_border_outlined),
-            SettingWidget(stext: 'Feedback', sicon: Icons.feedback_outlined),
+            InkWell(
+                onTap: () {
+                  sendMail();
+                },
+                child: SettingWidget(
+                    stext: 'Feedback', sicon: Icons.feedback_outlined)),
             GestureDetector(
                 onTap: () {
-                  openUrl();
+                  openWeb();
                 },
                 child: SettingWidget(
                     stext: 'About Us', sicon: MyFlutterApp.warning))
@@ -84,13 +89,18 @@ class _ScreenSettingsState extends State<ScreenSettings> {
         )));
   }
 
-  openUrl() async {
-    if (!await canLaunchUrl(
-        Uri.parse("https://sanjay-023.github.io/myweb/intex.html"))) {
-      !await launchUrl(
-          Uri.parse("https://sanjay-023.github.io/myweb/intex.html"));
-    } else {
-      throw "Could not launch url";
+  openWeb() async {
+    // ignore: deprecated_member_use
+    if (!await launch("https://sanjay-023.github.io/myweb/intex.html")) {
+      throw 'could not launch';
+    }
+  }
+
+  sendMail() async {
+    // ignore: deprecated_member_use
+    if (!await launch(
+        "mailto:sdsanjay023@gmail.com?subject=Feedback About Xpense App&body=")) {
+      throw 'could not launch';
     }
   }
 }

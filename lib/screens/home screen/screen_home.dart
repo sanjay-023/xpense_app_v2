@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xpense_app/db/function/db_helper.dart';
 import 'package:xpense_app/db/model/transaction_model.dart';
 import 'package:xpense_app/main.dart';
+import 'package:xpense_app/screens/add%20transaction/screen_transaction.dart';
 import 'package:xpense_app/screens/add%20transaction/widget/category_widget.dart';
 import 'package:xpense_app/screens/home%20screen/widgets/balance_card_widget.dart';
 import 'package:xpense_app/screens/home%20screen/widgets/chart_widget.dart';
@@ -86,8 +87,8 @@ class _ScreenHomeState extends State<ScreenHome> {
                     });
                   },
                   child: Container(
-                    height: 35,
-                    width: 100,
+                    width: MediaQuery.of(context).size.width * 0.26,
+                    height: MediaQuery.of(context).size.height * 0.05,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         color: monthIndex == 3
@@ -110,8 +111,8 @@ class _ScreenHomeState extends State<ScreenHome> {
                     });
                   },
                   child: Container(
-                    height: 35,
-                    width: 100,
+                    width: MediaQuery.of(context).size.width * 0.26,
+                    height: MediaQuery.of(context).size.height * 0.05,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         color: monthIndex == 2
@@ -134,8 +135,8 @@ class _ScreenHomeState extends State<ScreenHome> {
                     });
                   },
                   child: Container(
-                    height: 35,
-                    width: 100,
+                    width: MediaQuery.of(context).size.width * 0.26,
+                    height: MediaQuery.of(context).size.height * 0.05,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         color: monthIndex == 1
@@ -157,16 +158,41 @@ class _ScreenHomeState extends State<ScreenHome> {
                 future: dbHelper.fetch(),
                 builder: (context, snapshot) {
                   if (snapshot.hasError) {
-                    return const Text('Unexpected error');
+                    return const Text('');
                   }
                   if (snapshot.hasData) {
                     if (snapshot.data!.isEmpty) {
-                      return const Center(child: Text('No values found'));
+                      return InkWell(
+                        onTap: () {
+                          Navigator.of(context)
+                              .push(MaterialPageRoute(builder: (ctx) {
+                            return const ScreenAddTransaction();
+                          }));
+                        },
+                        child: Column(
+                          children: [
+                            Container(
+                              width: 300,
+                              height: 300,
+                              decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage(
+                                          'assets/images/no transaction.png'))),
+                            ),
+                            const Text(
+                              'Tap to Add New Transaction',
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 124, 124, 124),
+                                  fontSize: 18),
+                            )
+                          ],
+                        ),
+                      );
                     }
                   }
 
                   if (snapshot.data == null) {
-                    return const Text('Unexpected error');
+                    return const Text('');
                   }
 
                   getTotalBalance(snapshot.data!);

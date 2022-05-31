@@ -1,4 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xpense_app/db/model/transaction_model.dart';
 
 class DbHelper {
@@ -61,5 +62,8 @@ class DbHelper {
     box.clear();
   }
 
-  void resetShared() {}
+  void resetShared() async {
+    final _sharedprfns = await SharedPreferences.getInstance();
+    _sharedprfns.clear();
+  }
 }

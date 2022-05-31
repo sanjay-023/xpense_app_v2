@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:xpense_app/screens/home%20screen/dash_screen.dart';
 import 'package:xpense_app/screens/home%20screen/widgets/recent_transaction_widget.dart';
+import 'package:xpense_app/screens/onboarding%20screen/onboard_screen.dart';
 
 void resetPop(ctx) {
   showDialog(
@@ -11,12 +11,13 @@ void resetPop(ctx) {
           content: const Text('Do you really want to reset the data?'),
           actions: [
             TextButton(
-                onPressed: () {
+                onPressed: () async {
                   dbHelper.resetData();
-                  Navigator.of(ctx1)
-                      .pushReplacement(MaterialPageRoute(builder: (ctx2) {
-                    return ScreenDash();
-                  }));
+                  dbHelper.resetShared();
+                  Navigator.of(ctx).pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (ctx) {
+                    return const ScreenOnboard();
+                  }), (route) => false);
                 },
                 child: const Text('Yes')),
             TextButton(

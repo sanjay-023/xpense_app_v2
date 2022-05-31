@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:xpense_app/screens/home%20screen/widgets/common_widget.dart';
@@ -43,13 +44,14 @@ class _BalanceCardState extends State<BalanceCard> {
                     color: Colors.white)),
           ),
           commonSizedBox(3),
-          Text(
+          AutoSizeText(
             '\u{20B9} ${widget.totalbal < 0 ? 0 : widget.totalbal} ',
+            maxLines: 1,
             style: GoogleFonts.signikaNegative(
                 textStyle: const TextStyle(
-                    fontSize: 36,
                     fontWeight: FontWeight.w600,
-                    color: Colors.white)),
+                    color: Colors.white,
+                    fontSize: 36)),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
@@ -75,8 +77,9 @@ class _BalanceCardState extends State<BalanceCard> {
                             'Income',
                             style: TextStyle(color: Colors.white),
                           ),
-                          Text(
+                          AutoSizeText(
                             '\u{20B9} ${widget.totalIncome}',
+                            maxLines: 1,
                             style: const TextStyle(
                                 color: Colors.white, fontSize: 20),
                             textAlign: TextAlign.start,
@@ -103,8 +106,9 @@ class _BalanceCardState extends State<BalanceCard> {
                         children: [
                           const Text('Expense',
                               style: TextStyle(color: Colors.white)),
-                          Text(
+                          AutoSizeText(
                             '\u{20B9} ${widget.totalExpense}',
+                            maxLines: 1,
                             style: const TextStyle(
                                 color: Colors.white, fontSize: 20),
                             textAlign: TextAlign.start,

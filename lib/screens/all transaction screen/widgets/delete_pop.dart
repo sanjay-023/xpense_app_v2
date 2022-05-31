@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:xpense_app/screens/all%20transaction%20screen/screen_all_transaction.dart';
 import 'package:xpense_app/screens/home%20screen/dash_screen.dart';
 import 'package:xpense_app/screens/home%20screen/widgets/recent_transaction_widget.dart';
 
@@ -15,7 +16,7 @@ void delete(ctx, index) {
                   dbHelper.deleteData(index);
                   Navigator.of(ctx1)
                       .pushReplacement(MaterialPageRoute(builder: (ctx2) {
-                    return ScreenDash();
+                    return const ScreenAllTransaction();
                   }));
                 },
                 child: const Text('Yes')),

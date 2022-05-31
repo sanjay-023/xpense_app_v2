@@ -19,9 +19,11 @@ class ScreenProfile extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 80),
               child: Column(
                 children: [
-                  const Image(
-                    image: AssetImage('assets/images/xpense-logo-color.png'),
-                    width: 250,
+                  Image(
+                    width: MediaQuery.of(context).size.width * 0.6,
+                    image:
+                        const AssetImage('assets/images/xpense-logo-color.png'),
+                    // width: 250,
                   ),
                   const SizedBox(
                     height: 40,
@@ -61,9 +63,9 @@ class ScreenProfile extends StatelessWidget {
                     height: 70,
                     width: 320,
                     child: Text(
-                      't is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution t is a long established fact that a reader will be distracted by the readable content of a page when looking at its layo',
+                      'By clicking the submit button below, I hereby agree to and accept the following terms and conditions governing my use of xXpense app. I further reaffirm my acceptance of the general terms and conditions .',
                       style: TextStyle(
-                          fontSize: 10,
+                          fontSize: 12,
                           color: Color.fromARGB(255, 109, 108, 108)),
                       textAlign: TextAlign.center,
                     ),

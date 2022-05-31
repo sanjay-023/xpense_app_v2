@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:xpense_app/db/model/transaction_model.dart';
-
-import 'package:xpense_app/screens/all%20transaction%20screen/widgets/delete_pop.dart';
-import 'package:xpense_app/screens/edit%20transaction/edit_screen.dart';
+import 'package:xpense_app/screens/all%20transaction%20screen/screen_all_transaction.dart';
 
 class HomeRecentWidget extends StatefulWidget {
   List<TransactionModel> data;
@@ -57,34 +54,12 @@ class _HomeRecentWidgetState extends State<HomeRecentWidget> {
 
   expenseTileWidget(
       int value, String category, DateTime date, String edittype, int index) {
-    return Slidable(
-      startActionPane: ActionPane(motion: const ScrollMotion(), children: [
-        SlidableAction(
-          onPressed: (BuildContext context) {
-            delete(context, index);
-            setState(() {});
-          },
-          backgroundColor: const Color.fromARGB(255, 213, 20, 6),
-          label: 'Delete',
-          icon: Icons.delete,
-        ),
-        SlidableAction(
-          onPressed: (BuildContext context) {
-            Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
-              return ScreenEditTransaction(
-                amount: value,
-                category: category,
-                date: date,
-                type: edittype,
-                index: index,
-              );
-            }));
-          },
-          backgroundColor: const Color.fromARGB(255, 3, 161, 22),
-          label: 'Edit',
-          icon: Icons.edit,
-        )
-      ]),
+    return InkWell(
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
+          return const ScreenAllTransaction();
+        }));
+      },
       child: Container(
         margin: const EdgeInsets.all(8),
         padding: const EdgeInsets.all(18),
@@ -152,34 +127,12 @@ class _HomeRecentWidgetState extends State<HomeRecentWidget> {
 
   incomeTileWidget(
       int value, String category, DateTime date, String edittype, int index) {
-    return Slidable(
-      startActionPane: ActionPane(motion: const ScrollMotion(), children: [
-        SlidableAction(
-          onPressed: (BuildContext context) {
-            delete(context, index);
-            setState(() {});
-          },
-          backgroundColor: const Color.fromARGB(255, 213, 20, 6),
-          label: 'Delete',
-          icon: Icons.delete,
-        ),
-        SlidableAction(
-          onPressed: (BuildContext context) {
-            Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
-              return ScreenEditTransaction(
-                amount: value,
-                category: category,
-                date: date,
-                type: edittype,
-                index: index,
-              );
-            }));
-          },
-          backgroundColor: const Color.fromARGB(255, 3, 161, 22),
-          label: 'Edit',
-          icon: Icons.edit,
-        )
-      ]),
+    return InkWell(
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
+          return const ScreenAllTransaction();
+        }));
+      },
       child: Container(
         margin: const EdgeInsets.all(8),
         padding: const EdgeInsets.all(18),
