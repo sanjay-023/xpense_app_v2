@@ -44,19 +44,6 @@ class _CategoryWidgetState extends State<CategoryWidget> {
               child: SizedBox(
                   width: 210,
                   height: 60,
-                  // child: TextField(
-                  //   onChanged: (val) {
-                  //     category = val;
-                  //   },
-                  //   keyboardType: TextInputType.text,
-                  //   decoration: const InputDecoration(
-                  //     contentPadding: EdgeInsets.all(5),
-                  //     hintText: 'Category',
-                  //     focusedBorder: InputBorder.none,
-                  //     enabledBorder: InputBorder.none,
-                  //     errorBorder: InputBorder.none,
-                  //   ),
-                  // ),
                   child: Form(
                     child: TypeAheadFormField<String?>(
                       hideOnEmpty: true,

@@ -14,6 +14,7 @@ import 'package:xpense_app/screens/home%20screen/widgets/time_check.dart';
 import 'package:xpense_app/screens/statistics/screen_statistics.dart';
 
 String profName = '';
+// ignore: prefer_typing_uninitialized_variables
 var totalData;
 DateTime today = DateTime.now();
 DateTime now = DateTime.now();
@@ -63,10 +64,11 @@ class _ScreenHomeState extends State<ScreenHome> {
     return Scaffold(
         body: SafeArea(
             child: Padding(
-      padding: const EdgeInsets.all(26),
+      padding: const EdgeInsets.symmetric(horizontal: 26),
       child: SizedBox(
         child: ListView(
           children: [
+            commonSizedBox(26),
             Row(
               children: [
                 timecontrol(),
@@ -234,7 +236,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                       commonSizedBox(20),
                       //RecentTransaction(data: snapshot.data!),
                       HomeRecentWidget(data: snapshot.data!.toList()),
-                      commonSizedBox(60),
+                      commonSizedBox(85),
                     ],
                   );
                 }),

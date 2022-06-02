@@ -28,7 +28,11 @@ class NotificationService {
   static Future _notificationDetails() async {
     return const NotificationDetails(
       android: AndroidNotificationDetails('channel id', 'channel name',
-          icon: 'applogo', importance: Importance.max),
+          playSound: true,
+          enableVibration: true,
+          enableLights: true,
+          icon: 'applogo',
+          importance: Importance.max),
     );
   }
 

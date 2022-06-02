@@ -2,8 +2,8 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:xpense_app/db/model/transaction_model.dart';
 import 'package:xpense_app/screens/statistics/screen_statistics.dart';
-import 'package:xpense_app/screens/statistics/widget/stat_filter.dart';
 
+// ignore: must_be_immutable
 class ChartWidget extends StatefulWidget {
   List<TransactionModel> entiredata;
   final double height;
@@ -38,14 +38,7 @@ class _ChartWidgetState extends State<ChartWidget> {
     } else {
       return Container(
           decoration: BoxDecoration(
-              //color: Colors.white,
               color: Colors.transparent,
-              // boxShadow: const [
-              //   BoxShadow(
-              //       color: Color.fromARGB(33, 0, 0, 0),
-              //       blurRadius: 5,
-              //       spreadRadius: 4),
-              // ],
               borderRadius: BorderRadius.circular(20)),
           height: widget.height,
           width: 330,
@@ -115,7 +108,6 @@ class _ChartWidgetState extends State<ChartWidget> {
   }
 
   List<FlSpot> getPlotPoints(List<TransactionModel> entireData) {
-    // final today = DateTime.now();
     ChartWidget chart = ChartWidget(entiredata: widget.entiredata, height: 300);
     List tempDataSetIncome = [];
     final today = DateTime.now();

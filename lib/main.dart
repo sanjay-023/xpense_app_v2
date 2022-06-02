@@ -3,6 +3,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:xpense_app/screens/settingscreen/widgets/my_theme.dart';
+import 'package:xpense_app/screens/settingscreen/widgets/theme_data.dart';
 import 'package:xpense_app/screens/splash%20screen/screen_splash.dart';
 import 'package:timezone/data/latest.dart' as tz;
 
@@ -20,22 +21,41 @@ void main() async {
   runApp(const Myapp());
 }
 
-class Myapp extends StatelessWidget {
+class Myapp extends StatefulWidget {
   const Myapp({Key? key}) : super(key: key);
 
   @override
+  State<Myapp> createState() => _MyappState();
+}
+
+class _MyappState extends State<Myapp> {
+  DarkThemeProvider themeChangeProvider = DarkThemeProvider();
+  void getCurrentAppTheme() async {
+    themeChangeProvider.darkTheme =
+        await themeChangeProvider.darkThemePreferences.getTheme();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getCurrentAppTheme();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-        create: (context) => ThemeProvider(),
-        builder: (context, _) {
-          final themeProvider = Provider.of<ThemeProvider>(context);
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) {
+            return themeChangeProvider;
+          })
+        ],
+        child:
+            Consumer<DarkThemeProvider>(builder: (context, themeData, child) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            themeMode: themeProvider.themeMode,
-            theme: MyThemes.lightTheme,
-            darkTheme: MyThemes.darkTheme,
+            theme: Styles.themeData(themeChangeProvider.darkTheme, context),
             home: const ScreenSplash(),
           );
-        });
+        }));
   }
 }

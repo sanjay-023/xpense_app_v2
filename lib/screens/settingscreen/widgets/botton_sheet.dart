@@ -18,7 +18,6 @@ class _BottomSheetNotState extends State<BottomSheetNot> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     NotificationService().init(initScheduled: true);
   }
@@ -44,7 +43,7 @@ class _BottomSheetNotState extends State<BottomSheetNot> {
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 20),
               child: Text(
-                "Set Remainder",
+                "Set Reminder",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
             ),
@@ -93,15 +92,6 @@ class _BottomSheetNotState extends State<BottomSheetNot> {
                     onPressed: () async {
                       pickedTime = await showTimePicker(
                           context: context, initialTime: currentTimme);
-                      // if (pickedTime != null && pickedTime != currentTimme) {
-                      //   setState(() {
-                      //     NotificationService.showScheduledNotifications(
-                      //         title: 'Xpense App',
-                      //         body: messageController.text,
-                      //         scheduledTime: Time(
-                      //             pickedTime!.hour, pickedTime!.minute, 0));
-                      //   });
-                      // }
                     },
                     child: const Text(
                       'Set Timer',

@@ -15,7 +15,7 @@ class _ScreenSplashState extends State<ScreenSplash> {
   @override
   void initState() {
     checkUserLoggedIn();
-    // TODO: implement initState
+
     super.initState();
   }
 
@@ -56,7 +56,7 @@ class _ScreenSplashState extends State<ScreenSplash> {
     } else {
       await Future.delayed(const Duration(seconds: 3));
       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx) {
-        return ScreenDash();
+        return const ScreenDash();
       }));
     }
   }

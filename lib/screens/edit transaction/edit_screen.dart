@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:xpense_app/db/function/db_helper.dart';
 
-import 'package:xpense_app/screens/add%20transaction/widget/date_pick.dart';
-
-import 'package:xpense_app/screens/add%20transaction/widget/trans_type.dart';
 import 'package:xpense_app/screens/edit%20transaction/widget/edit_amount_widget.dart';
 import 'package:xpense_app/screens/edit%20transaction/widget/edit_category_widget.dart';
 import 'package:xpense_app/screens/edit%20transaction/widget/edit_date_widget.dart';

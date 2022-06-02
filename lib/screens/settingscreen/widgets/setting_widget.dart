@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:xpense_app/screens/home%20screen/dash_screen.dart';
 
+// ignore: must_be_immutable
 class SettingWidget extends StatelessWidget {
   SettingWidget(
       {Key? key,

@@ -4,6 +4,7 @@ import 'package:xpense_app/screens/home%20screen/widgets/custom_icons.dart';
 String category = '';
 String editedCategory = '';
 
+// ignore: must_be_immutable
 class EditCategoryWidget extends StatefulWidget {
   EditCategoryWidget({Key? key, required this.editCategory}) : super(key: key);
   String editCategory;
@@ -14,11 +15,6 @@ class EditCategoryWidget extends StatefulWidget {
 
 class _EditCategoryWidgetState extends State<EditCategoryWidget> {
   final editCategoryController = TextEditingController();
-  // @override
-  // void initState() {
-  //   editCategoryController.text = widget.editCategory;
-  //   super.initState();
-  // }
 
   @override
   Widget build(BuildContext context) {

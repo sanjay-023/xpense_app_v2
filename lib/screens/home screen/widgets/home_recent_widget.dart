@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:xpense_app/db/model/transaction_model.dart';
 import 'package:xpense_app/screens/all%20transaction%20screen/screen_all_transaction.dart';
 
+// ignore: must_be_immutable
 class HomeRecentWidget extends StatefulWidget {
   List<TransactionModel> data;
   List<String> month = [

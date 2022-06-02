@@ -9,6 +9,7 @@ import 'package:xpense_app/screens/edit%20transaction/edit_screen.dart';
 DbHelper dbHelper = DbHelper();
 String dropDownValue = 'All';
 
+// ignore: must_be_immutable
 class AllTransWidget extends StatefulWidget {
   List<TransactionModel> data;
   List<String> month = [

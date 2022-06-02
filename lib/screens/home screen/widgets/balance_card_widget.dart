@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:xpense_app/screens/home%20screen/widgets/common_widget.dart';
 
+// ignore: must_be_immutable
 class BalanceCard extends StatefulWidget {
   int totalbal;
   int totalIncome;

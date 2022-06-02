@@ -27,7 +27,7 @@ class _NotificationWidgetState extends State<NotificationWidget> {
             size: 24,
           ),
           title: const Text(
-            'Remainder',
+            'Reminder',
             style: TextStyle(fontSize: 22),
           ),
           trailing: const Icon(Icons.arrow_forward_ios)),

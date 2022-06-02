@@ -8,6 +8,7 @@ import 'package:xpense_app/screens/edit%20transaction/edit_screen.dart';
 
 DbHelper dbHelper = DbHelper();
 
+// ignore: must_be_immutable
 class RecentTransaction extends StatefulWidget {
   List<TransactionModel> data;
   List<String> month = [

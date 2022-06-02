@@ -4,6 +4,7 @@ import 'package:xpense_app/screens/home%20screen/widgets/custom_icons.dart';
 int? amount;
 int? editedamount;
 
+// ignore: must_be_immutable
 class EditAmountWidget extends StatefulWidget {
   EditAmountWidget({Key? key, required this.editAmount}) : super(key: key);
   int editAmount;
@@ -14,11 +15,6 @@ class EditAmountWidget extends StatefulWidget {
 
 class _EditAmountWidgetState extends State<EditAmountWidget> {
   final editAmountController = TextEditingController();
-  // @override
-  // void initState() {
-  //   editAmountController.text = widget.editAmount.toString();
-  //   super.initState();
-  // }
 
   @override
   Widget build(BuildContext context) {

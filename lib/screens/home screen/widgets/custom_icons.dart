@@ -47,6 +47,7 @@ class MyFlutterApp {
       IconData(0xe80b, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData share =
       IconData(0xe80c, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  // ignore: constant_identifier_names
   static const IconData up_arrow =
       IconData(0xe80d, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData warning =

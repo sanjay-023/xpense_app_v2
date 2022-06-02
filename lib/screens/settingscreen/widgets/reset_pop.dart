@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:xpense_app/screens/home%20screen/widgets/recent_transaction_widget.dart';
-import 'package:xpense_app/screens/onboarding%20screen/onboard_screen.dart';
+import 'package:xpense_app/screens/splash%20screen/screen_splash.dart';
 
 void resetPop(ctx) {
   showDialog(
@@ -14,9 +14,10 @@ void resetPop(ctx) {
                 onPressed: () async {
                   dbHelper.resetData();
                   dbHelper.resetShared();
+
                   Navigator.of(ctx).pushAndRemoveUntil(
                       MaterialPageRoute(builder: (ctx) {
-                    return const ScreenOnboard();
+                    return const ScreenSplash();
                   }), (route) => false);
                 },
                 child: const Text('Yes')),

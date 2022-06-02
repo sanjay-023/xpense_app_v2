@@ -20,7 +20,6 @@ class ScreenSettings extends StatefulWidget {
 class _ScreenSettingsState extends State<ScreenSettings> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     tz.initializeTimeZones();
   }

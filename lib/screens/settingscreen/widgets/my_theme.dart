@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xpense_app/main.dart';
+import 'package:xpense_app/screens/settingscreen/widgets/theme_preference.dart';
 
-class ThemeProvider extends ChangeNotifier {
-  ThemeMode themeMode = ThemeMode.light;
-  bool get isDarkMode => themeMode == ThemeMode.dark;
-  bool get isLightMode => themeMode == ThemeMode.light;
+class DarkThemeProvider with ChangeNotifier {
+  DarkThemePreferences darkThemePreferences = DarkThemePreferences();
+  bool _darkTheme = false;
+  bool get darkTheme => _darkTheme;
 
-  void toggleTheme(bool isOn) {
-    themeMode = isOn ? ThemeMode.dark : ThemeMode.light;
+  set darkTheme(bool value) {
+    _darkTheme = value;
+    darkThemePreferences.setDarkTheme(value);
     notifyListeners();
   }
 }

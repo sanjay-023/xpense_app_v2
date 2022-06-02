@@ -18,7 +18,7 @@ dateWidget(month, select) {
         labelStyle: const TextStyle(color: Colors.white),
         selected: select,
         selectedColor: const Color.fromARGB(255, 139, 9, 204),
-        disabledColor: Color.fromARGB(255, 148, 148, 148),
+        disabledColor: const Color.fromARGB(255, 148, 148, 148),
       ),
     ),
   );

@@ -4,6 +4,7 @@ import 'package:xpense_app/screens/home%20screen/widgets/custom_icons.dart';
 //DateTime selectedDate = DateTime.now();
 DateTime editedDate = DateTime.now();
 
+// ignore: must_be_immutable
 class EditDatepick extends StatefulWidget {
   EditDatepick({Key? key, required this.editdate}) : super(key: key);
   DateTime editdate;
@@ -41,7 +42,7 @@ class _EditDatepickState extends State<EditDatepick> {
       setState(() {
         widget.editdate = picked;
         editedDate = widget.editdate;
-        print(editedDate);
+        //print(editedDate);
       });
     }
   }
