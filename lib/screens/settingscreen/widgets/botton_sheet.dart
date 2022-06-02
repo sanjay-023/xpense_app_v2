@@ -55,7 +55,7 @@ class _BottomSheetNotState extends State<BottomSheetNot> {
                   width: 320,
                   height: 60,
                   decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 227, 225, 225),
+                      color: Theme.of(context).cardColor,
                       borderRadius: BorderRadius.circular(30)),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),

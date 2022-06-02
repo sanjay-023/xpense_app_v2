@@ -67,7 +67,7 @@ class _ScreenAllTransactionState extends State<ScreenAllTransaction> {
             ),
             backgroundColor: Colors.transparent,
             elevation: 0,
-            foregroundColor: Colors.black,
+            foregroundColor: Theme.of(context).secondaryHeaderColor,
           ),
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 26),

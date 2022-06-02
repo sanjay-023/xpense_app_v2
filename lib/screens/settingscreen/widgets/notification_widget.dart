@@ -20,17 +20,17 @@ class _NotificationWidgetState extends State<NotificationWidget> {
               return const BottomSheetNot();
             });
       },
-      child: const ListTile(
+      child: ListTile(
           leading: Icon(
             MyFlutterApp.notification,
-            color: Colors.black,
+            color: Theme.of(context).secondaryHeaderColor,
             size: 24,
           ),
-          title: Text(
+          title: const Text(
             'Remainder',
             style: TextStyle(fontSize: 22),
           ),
-          trailing: Icon(Icons.arrow_forward_ios)),
+          trailing: const Icon(Icons.arrow_forward_ios)),
     );
   }
 }

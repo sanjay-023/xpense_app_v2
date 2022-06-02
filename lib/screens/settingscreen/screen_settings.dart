@@ -3,6 +3,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:xpense_app/screens/home%20screen/dash_screen.dart';
 import 'package:xpense_app/screens/home%20screen/widgets/common_widget.dart';
 import 'package:xpense_app/screens/home%20screen/widgets/custom_icons.dart';
+import 'package:xpense_app/screens/settingscreen/widgets/change_button.dart';
 import 'package:xpense_app/screens/settingscreen/widgets/notification_widget.dart';
 import 'package:xpense_app/screens/settingscreen/widgets/privacy_policy.dart';
 import 'package:xpense_app/screens/settingscreen/widgets/reset_pop.dart';
@@ -43,49 +44,56 @@ class _ScreenSettingsState extends State<ScreenSettings> {
           ),
           backgroundColor: Colors.transparent,
           elevation: 0,
-          foregroundColor: Colors.black,
+          foregroundColor: Theme.of(context).secondaryHeaderColor,
           title: const Text(
             'Settings',
           ),
         ),
         body: SafeArea(
-            child: Column(
-          children: [
-            commonSizedBox(10),
-            const NotificationWidget(),
-            GestureDetector(
+            child: SingleChildScrollView(
+          child: Column(
+            children: [
+              commonSizedBox(10),
+              const NotificationWidget(),
+              SettingWidget(
+                stext: 'Dark Mode',
+                sicon: Icons.dark_mode_outlined,
+                trail: const ChaneButton(),
+              ),
+              GestureDetector(
+                  onTap: () {
+                    resetPop(context);
+                  },
+                  child: SettingWidget(
+                      stext: 'Reset Data', sicon: Icons.restart_alt)),
+              InkWell(
                 onTap: () {
-                  resetPop(context);
+                  showModalBottomSheet(
+                      context: context,
+                      builder: (builder) {
+                        return const PrivacyPolicy();
+                      });
                 },
                 child: SettingWidget(
-                    stext: 'Reset Data', sicon: Icons.restart_alt)),
-            InkWell(
-              onTap: () {
-                showModalBottomSheet(
-                    context: context,
-                    builder: (builder) {
-                      return const PrivacyPolicy();
-                    });
-              },
-              child: SettingWidget(
-                  stext: 'Privacy Policy', sicon: Icons.privacy_tip_outlined),
-            ),
-            SettingWidget(stext: 'Share', sicon: Icons.share_outlined),
-            SettingWidget(
-                stext: 'Rate This App', sicon: Icons.star_border_outlined),
-            InkWell(
-                onTap: () {
-                  sendMail();
-                },
-                child: SettingWidget(
-                    stext: 'Feedback', sicon: Icons.feedback_outlined)),
-            GestureDetector(
-                onTap: () {
-                  openWeb();
-                },
-                child: SettingWidget(
-                    stext: 'About Us', sicon: MyFlutterApp.warning))
-          ],
+                    stext: 'Privacy Policy', sicon: Icons.privacy_tip_outlined),
+              ),
+              SettingWidget(stext: 'Share', sicon: Icons.share_outlined),
+              SettingWidget(
+                  stext: 'Rate This App', sicon: Icons.star_border_outlined),
+              InkWell(
+                  onTap: () {
+                    sendMail();
+                  },
+                  child: SettingWidget(
+                      stext: 'Feedback', sicon: Icons.feedback_outlined)),
+              GestureDetector(
+                  onTap: () {
+                    openWeb();
+                  },
+                  child: SettingWidget(
+                      stext: 'About Us', sicon: MyFlutterApp.warning))
+            ],
+          ),
         )));
   }
 

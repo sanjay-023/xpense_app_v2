@@ -2,10 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:xpense_app/screens/home%20screen/dash_screen.dart';
 
 class SettingWidget extends StatelessWidget {
-  SettingWidget({Key? key, required this.stext, required this.sicon})
+  SettingWidget(
+      {Key? key,
+      required this.stext,
+      required this.sicon,
+      this.trail = const Text('')})
       : super(key: key);
   String stext;
   IconData sicon;
+  Widget trail;
 
   @override
   Widget build(BuildContext context) {
@@ -19,13 +24,14 @@ class SettingWidget extends StatelessWidget {
       child: ListTile(
         leading: Icon(
           sicon,
-          color: Colors.black,
+          color: Theme.of(context).secondaryHeaderColor,
           size: 24,
         ),
         title: Text(
           stext,
           style: const TextStyle(fontSize: 22),
         ),
+        trailing: trail,
       ),
     );
   }

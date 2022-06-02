@@ -10,12 +10,14 @@ import 'package:xpense_app/screens/home%20screen/widgets/balance_card_widget.dar
 import 'package:xpense_app/screens/home%20screen/widgets/chart_widget.dart';
 import 'package:xpense_app/screens/home%20screen/widgets/common_widget.dart';
 import 'package:xpense_app/screens/home%20screen/widgets/home_recent_widget.dart';
-import 'package:xpense_app/screens/home%20screen/widgets/select_month.dart';
 import 'package:xpense_app/screens/home%20screen/widgets/time_check.dart';
 import 'package:xpense_app/screens/statistics/screen_statistics.dart';
 
 String profName = '';
 var totalData;
+DateTime today = DateTime.now();
+DateTime now = DateTime.now();
+int monthIndex = 1;
 
 class ScreenHome extends StatefulWidget {
   const ScreenHome({Key? key}) : super(key: key);

@@ -28,7 +28,7 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
-          foregroundColor: Colors.black,
+          foregroundColor: Theme.of(context).secondaryHeaderColor,
         ),
         body: SafeArea(
           child: Padding(
@@ -49,13 +49,13 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                     commonSizedBox(30),
                     const AmountWidget(),
                     commonSizedBox(20),
-                    CategoryWidget(),
+                    const CategoryWidget(),
                     commonSizedBox(20),
                     const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 30),
                         child: TransType()),
                     commonSizedBox(20),
-                    Datepick(),
+                    const Datepick(),
                     commonSizedBox(20),
                     ElevatedButton(
                         onPressed: () async {

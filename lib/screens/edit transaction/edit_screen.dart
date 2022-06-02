@@ -13,7 +13,7 @@ import 'package:xpense_app/screens/home%20screen/dash_screen.dart';
 import 'package:xpense_app/screens/home%20screen/widgets/common_widget.dart';
 
 class ScreenEditTransaction extends StatefulWidget {
-  ScreenEditTransaction(
+  const ScreenEditTransaction(
       {Key? key,
       required this.amount,
       required this.category,
@@ -42,7 +42,7 @@ class _ScreenEditTransactionState extends State<ScreenEditTransaction> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
-          foregroundColor: Colors.black,
+          foregroundColor: Theme.of(context).secondaryHeaderColor,
         ),
         body: SafeArea(
           child: Padding(

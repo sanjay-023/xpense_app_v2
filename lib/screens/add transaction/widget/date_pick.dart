@@ -4,7 +4,7 @@ import 'package:xpense_app/screens/home%20screen/widgets/custom_icons.dart';
 DateTime selectedDate = DateTime.now();
 
 class Datepick extends StatefulWidget {
-  Datepick({Key? key}) : super(key: key);
+  const Datepick({Key? key}) : super(key: key);
 
   @override
   State<Datepick> createState() => _DatepickState();
@@ -46,7 +46,7 @@ class _DatepickState extends State<Datepick> {
       width: 320,
       height: 60,
       decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 227, 225, 225),
+          color: Theme.of(context).cardColor,
           borderRadius: BorderRadius.circular(30)),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -72,8 +72,8 @@ class _DatepickState extends State<Datepick> {
                         children: [
                           Text(
                             '${selectedDate.day} ${month[selectedDate.month - 1]}',
-                            style: const TextStyle(
-                                color: Color.fromARGB(255, 99, 99, 99),
+                            style: TextStyle(
+                                color: Theme.of(context).focusColor,
                                 fontSize: 17),
                           ),
                         ],

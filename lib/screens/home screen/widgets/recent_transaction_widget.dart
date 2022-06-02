@@ -185,7 +185,7 @@ class _RecentTransactionState extends State<RecentTransaction> {
         margin: const EdgeInsets.all(8),
         padding: const EdgeInsets.all(18),
         decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 205, 203, 203),
+            color: Theme.of(context).canvasColor,
             borderRadius: BorderRadius.circular(20)),
         child: Column(
           children: [

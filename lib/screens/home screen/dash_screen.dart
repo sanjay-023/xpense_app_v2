@@ -68,7 +68,7 @@ class _ScreenDashState extends State<ScreenDash> {
                         _currentSelectedIntex = newIntex;
                       });
                     },
-                    backgroundColor: const Color.fromARGB(255, 213, 212, 212),
+                    backgroundColor: Theme.of(context).primaryColor,
                     items: const [
                       BottomNavigationBarItem(
                           icon: Icon(

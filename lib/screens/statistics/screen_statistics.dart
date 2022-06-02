@@ -47,7 +47,7 @@ class _ScreenStatisticsState extends State<ScreenStatistics> {
             title: const Text('Statistics'),
             backgroundColor: Colors.transparent,
             elevation: 0,
-            foregroundColor: Colors.black,
+            foregroundColor: Theme.of(context).secondaryHeaderColor,
           ),
           body: SingleChildScrollView(
             child: Padding(

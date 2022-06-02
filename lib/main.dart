@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:xpense_app/screens/settingscreen/widgets/my_theme.dart';
 import 'package:xpense_app/screens/splash%20screen/screen_splash.dart';
 import 'package:timezone/data/latest.dart' as tz;
 
 const saveKey = 'profile name';
+const themeKey = "themekey";
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,10 +25,17 @@ class Myapp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(primaryColor: const Color.fromARGB(255, 139, 9, 204)),
-      home: const ScreenSplash(),
-      debugShowCheckedModeBanner: false,
-    );
+    return ChangeNotifierProvider(
+        create: (context) => ThemeProvider(),
+        builder: (context, _) {
+          final themeProvider = Provider.of<ThemeProvider>(context);
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            themeMode: themeProvider.themeMode,
+            theme: MyThemes.lightTheme,
+            darkTheme: MyThemes.darkTheme,
+            home: const ScreenSplash(),
+          );
+        });
   }
 }
