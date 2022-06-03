@@ -57,7 +57,7 @@ class _HomeRecentWidgetState extends State<HomeRecentWidget> {
       int value, String category, DateTime date, String edittype, int index) {
     return InkWell(
       onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
+        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx) {
           return const ScreenAllTransaction();
         }));
       },
@@ -130,7 +130,7 @@ class _HomeRecentWidgetState extends State<HomeRecentWidget> {
       int value, String category, DateTime date, String edittype, int index) {
     return InkWell(
       onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
+        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (ctx) {
           return const ScreenAllTransaction();
         }));
       },

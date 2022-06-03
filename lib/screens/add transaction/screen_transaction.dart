@@ -66,10 +66,10 @@ class _ScreenAddTransactionState extends State<ScreenAddTransaction> {
                             await dbHelper.adddata(
                                 amount, selectedDate, category, type);
 
-                            Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(builder: (ctx) {
+                            Navigator.of(context).pushAndRemoveUntil(
+                                MaterialPageRoute(builder: (ctx3) {
                               return const ScreenDash();
-                            }));
+                            }), (route) => false);
                             amount = 0;
                             category = '';
                           }

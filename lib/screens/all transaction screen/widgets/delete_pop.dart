@@ -14,10 +14,10 @@ void delete(ctx, index) {
             TextButton(
                 onPressed: () {
                   dbHelper.deleteData(index);
-                  Navigator.of(ctx1)
-                      .pushReplacement(MaterialPageRoute(builder: (ctx2) {
+                  Navigator.pushAndRemoveUntil(ctx1,
+                      MaterialPageRoute(builder: (ctx) {
                     return const ScreenAllTransaction();
-                  }));
+                  }), (route) => false);
                 },
                 child: const Text('Yes')),
             TextButton(

@@ -35,7 +35,8 @@ class _BottomSheetNotState extends State<BottomSheetNot> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: SizedBox(
+      child: Container(
+        color: Theme.of(context).scaffoldBackgroundColor,
         height: 550,
         child: Column(
           children: [

@@ -168,7 +168,7 @@ class _ChartWidgetState extends State<ChartWidget> {
 
     for (var i = 0; i < yearTempDataSetExpense.length; i++) {
       chart.yearDataSetExpense
-          .add(FlSpot(i.toDouble(), yearTempDataSetExpense[i].toDouble()));
+          .add(FlSpot(i + 1.toDouble(), yearTempDataSetExpense[i].toDouble()));
     }
 
     return chart.yearDataSetExpense;
@@ -184,7 +184,7 @@ class _ChartWidgetState extends State<ChartWidget> {
 
     for (var i = 0; i < yearTempDataSetExpense.length; i++) {
       chart.yearDataSetExpense
-          .add(FlSpot(i.toDouble(), yearTempDataSetExpense[i].toDouble()));
+          .add(FlSpot(i + 1.toDouble(), yearTempDataSetExpense[i].toDouble()));
     }
 
     return chart.yearDataSetExpense;
